@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Tratchat Web App</title>
+  <meta name="description" content="Welcome to the tratchat web app! Tratchat is secure and unblockable chat.">
+  <link rel="stylesheet" href="https://cdn.trat.chat/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+  <style>
+  /*
+    @font-face {
+      font-family: 'Fredoka One';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://cdn.trat.chat/font1.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }*/
+
+    .login-clean {
+      background: #f1f7fc;
+      padding: 80px 0;
+      border-radius: 25px;
+
+    }
+
+    .login-clean form {
+      max-width: 320px;
+      width: 90%;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 25px;
+      color: #505e6c;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-clean .illustration {
+      text-align: center;
+      padding: 0 0 20px;
+      font-size: 100px;
+      color: rgb(244, 71, 107);
+    }
+
+    .login-clean form .form-control {
+      background: #f7f9fc;
+      border: none;
+      border-bottom: 1px solid #dfe7f1;
+      border-radius: 0;
+      box-shadow: none;
+      outline: none;
+      color: inherit;
+      text-indent: 8px;
+      height: 42px;
+    }
+
+    .login-clean form .btn-primary {
+      background: #f4476b;
+      border: none;
+      border-radius: 4px;
+      padding: 11px;
+      box-shadow: none;
+      margin-top: 26px;
+      text-shadow: none;
+      outline: none !important;
+    }
+
+    .login-clean form .btn-primary:hover,
+    .login-clean form .btn-primary:active {
+      background: #eb3b60;
+    }
+
+    .login-clean form .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    .login-clean form .forgot {
+      display: block;
+      text-align: center;
+      font-size: 12px;
+      color: #6f7a85;
+      opacity: 0.9;
+      text-decoration: none;
+    }
+
+    .login-clean form .forgot:hover,
+    .login-clean form .forgot:active {
+      opacity: 1;
+      text-decoration: none;
+    }
+
+    .list-group-item .chat:hover {
+      background-color: rgb(200, 200, 200);
+    }
+
+    .chat:hover {
+      background-color: rgb(244, 244, 244);
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body style="background-color: rgb(241,247,252);">
+
+
+  <div id="dataManagement">
+
+    <data name="username" data="none">
+      <data name="publicKey" data="none">
+        <data name="privateKey" data="none">
+          <data name="bridge" data="https://trat.chat">
+            <data name="currentPage" data="none">
+              <data name="userPublic" data="none">
+                <data name="userPrivate" data="none">
+                  <data name="yourUsername" data="none">
+                    <data name="chatID" data="none">
+                      <data name="token" data="none">
+                        <data name="chatsHash" data="none">
+
+  </div>
+
+  <main id="chatsPage">
+    <div class="row" style="width: 100vw;">
+      <div class="col-xl-3" style="padding-left: 0px!important;width: 20vw!important;padding-right: 0px!important;background-color: white;height: 100vh;">
+        <ul class="list-group" style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;background-color: transparent;">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;background-color: transparent;border-color: transparent;padding-right: 0px;padding-left: 0px;">
+            <h1 class="text-center" style="color: #f4476b;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">tratchat</h1>
+            <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5><button class="btn btn-outline-primary btn-block" type="button"
+              style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('chatsPage')">chats</button>
+            <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
+              onclick="go('accountPage')">account</button><button class="btn btn-outline-primary btn-block" type="button"
+              style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('dataPage')">data &amp; privacy</button>
+            <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
+              onclick="location.href='https://tratchat.com'"> return to home </button>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xl-3"
+        style="padding-right: 0px!important;padding-left: 0px!important;width: 20vw!important;background-color: white;height: 100vh;overflow-y: auto;/*border-left: #888;*//*border-color: #888;*//*border-left: 1px solid rgba(0,0,0,0.125);*/">
+        <ul class="list-group">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;border-bottom-color: transparent;border-left-color: transparent;border-right-color: transparent;">
+            <h3 class="text-center" style="color: #f4476b;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">chats<i
+                onclick="$('#startAChatModal').modal();$('#startChatYouself').hide();$('#startChatNotFOund').hide();$('#startChatResults').hide();$('#startChatInput').val('')" class="fa fa-plus float-right"></i></h3>
+          </li>
+        </ul>
+        <ul class="list-group" id="chatsPageChats" style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;margin-bottom: 1vh;">
+          <div style="width:100%" class="text-center d-flex justify-content-center align-items-center"><span class="spinner-border" role="status" style="margin-top:2vh;width: 3vw;height: 3vw;"></span></div>
+        </ul>
+      </div>
+      <div class="col" style="width: 60vw!important;">
+        <div style="/*position: fixed;*//*top: 0;*/background-color: rgb(241,247,252);width: 100%;height: 16vh;">
+          <h3 id="chatname" class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 12px;"></h3>
+          <h6 id="chatusername" class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #6f7a85;padding-top: 1.5vh;"></h6>
+          <hr style="font-size: 22px;background-color: #ffffff;margin-right: 10vh;margin-left: 10vh;">
+        </div>
+        <div id="chatPageChatList" style="height: 69vh; overflow-y: auto;">
+
+        </div>
+        <form class="form-inline" style="position: absolute;bottom: 0;width: 100%;/*margin-bottom: 2%;*/margin-bottom: 3vh;height: 10vh;"><input id="sendChatInput" class="form-control" type="text" style="width: 80%;border-color: transparent;">
+          <button onclick="sendChat()" class="btn btn-primary" type="button" style="background-color: #f4476b;outline-color: transparent;box-shadow: none;border-color: transparent;width: 19%;">Send&nbsp;</button></form>
+      </div>
+    </div>
+  </main>
+  <main id="loginPage">
+    <h1 class="text-center" style="margin-bottom: 0px;padding-top: 4vh;font-family: 'Fredoka One', cursive;color: #f4476b;">tratchat</h1>
+    <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5>
+    <hr style="font-size: 22px;background-color: #ffffff;margin-right: 10vw;margin-left: 10vw;">
+    <div class="login-clean">
+      <form method="post">
+        <h1 class="text-center" style="margin-bottom: 24px;font-family: 'Nunito Sans', sans-serif;color: #f4476b;">Login</h1>
+        <div class="form-group"><input id="loginFormUsername" class="form-control" type="text" placeholder="Username"></div>
+        <div class="form-group"><input id="loginFormPassword" class="form-control" type="password" placeholder="Password"></div>
+        <div class="form-group"><button onclick="login()" class="btn btn-primary btn-block" type="button">Login</button></div><button onclick="go('welcomePage')" class="btn btn-light btn-block" type="button" style="color: #f4476b;">Back</button>
+        <div class="text-center" style="margin-top: 2vh;"></div>
+      </form>
+    </div>
+  </main>
+  <main id="signUpPage">
+    <h1 class="text-center" style="margin-bottom: 0px;padding-top: 4vh;font-family: 'Fredoka One', cursive;color: #f4476b;">tratchat</h1>
+    <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5>
+    <hr style="font-size: 22px;background-color: #ffffff;margin-right: 10vw;margin-left: 10vw;">
+    <div class="login-clean">
+      <form method="post">
+        <h1 class="text-center" style="margin-bottom: 24px;font-family: 'Nunito Sans', sans-serif;color: #f4476b;">Sign Up</h1>
+        <div class="form-group"><input id="signUpFormName" class="form-control" type="text" placeholder="Name"></div>
+        <div class="form-group"><input id="signUpFormUsername" class="form-control" type="text" placeholder="Username"></div>
+        <div class="form-group"><input id="signUpFormPassword" class="form-control" type="password" placeholder="Password"></div>
+        <div class="form-group"><button onclick="signUp()" class="btn btn-primary btn-block" type="button">Sign Up</button></div><button onclick="go('welcomePage')" class="btn btn-light btn-block" type="button" style="color: #f4476b;">Back</button>
+        <div class="text-center" style="margin-top: 2vh;"></div>
+      </form>
+    </div>
+  </main>
+  <main id="welcomePage">
+    <h1 class="text-center" style="margin-bottom: 0px;padding-top: 4vh;font-family: 'Fredoka One', cursive;color: #f4476b;">tratchat</h1>
+    <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5>
+    <hr style="font-size: 22px;background-color: #ffffff;margin-right: 10vw;margin-left: 10vw;">
+    <div class="login-clean">
+      <form method="post">
+        <h1 class="text-center" style="margin-bottom: 0px;font-family: 'Nunito Sans', sans-serif;color: #f4476b;">welcome!</h1>
+        <div class="form-group">
+          <button onclick="go('loginPage')" class="btn btn-primary btn-block" type="button">Login</button>
+          <button onclick="go('signUpPage')" class="btn btn-primary btn-block" type="button">Sign Up</button></div>
+        <div class="text-center" style="margin-top: 2vh;"></div>
+      </form>
+    </div>
+  </main>
+  <main id="startScreenPage">
+    <h1 class="text-center" style="margin-bottom: 0px;padding-top: 4vh;font-family: 'Fredoka One', cursive;color: #f4476b;">tratchat</h1>
+    <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5>
+    <hr style="font-size: 22px;background-color: #ffffff;margin-right: 10vw;margin-left: 10vw;">
+    <div class="login-clean">
+      <form method="post">
+        <h5 class="text-center" style="margin-bottom: 0px;font-family: 'Nunito Sans', sans-serif;color: #f4476b;">establishing a secure connection to our servers</h5>
+        <div class="text-center d-flex justify-content-center align-items-center" style="margin-top: 19px;margin-bottom: 8px;"><span class="spinner-border" role="status" style="width: 100px;height: 100px;/*border: 0.5em solid;*/"></span></div>
+        <div class="text-center" style="margin-top: 2vh;"><a class="text-center" href="#" style="font-size: 3vh;">Hang Tight!</a></div>
+        <div class="text-center" style="margin-top: 2vh;"><a class="text-center" href="#" style="font-size: 3vh;"></a></div>
+      </form>
+    </div>
+  </main>
+  <div class="modal fade" role="dialog" tabindex="-1" id="fullpageloadingModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body d-flex justify-content-center align-items-center" style="height: 40vh;background-color: transparent!important;">
+          <div class="text-center">
+            <h4 style="color: #f4476b;" id="loadingmodaltext"></h4><span class="spinner-border text-center" role="status" style="width: 10vh;height: 10vh;/*border: 4vh;*/margin-top: 3vh;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" role="dialog" tabindex="-1" id="loginfailed">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">tratchat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center">Login Failed</h1>
+          <h5 class="text-center">Username Or Password incorrect.</h5>
+        </div>
+        <div class="modal-footer"><button class="btn btn-primary" type="button" style="background-color: #f4476b;border-color: transparent;" data-dismiss="modal">try again</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="signupFailed">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">tratchat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center">Sign Up Failed</h1>
+          <h5 class="text-center">Username Taken</h5>
+        </div>
+        <div class="modal-footer"><button class="btn btn-primary" type="button" style="background-color: #f4476b;border-color: transparent;" data-dismiss="modal">try again</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="errorModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">tratchat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center">ERROR</h1>
+          <h5 class="text-center"></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="confirmmodal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">chat options</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h5 class="text-center">are you sure you want to...</h5>
+          <h6 id="confirmText" class="text-center" style="margin-bottom: 3vh;">purge last 10 chats?</h6>
+          <div>
+            <button id="confirmYes" class="btn btn-outline-primary float-left" type="button" style="color: rgb(0,183,96);outline-color: #00b760!important;box-shadow: none;border-color: #00b760;margin-left: 10vh;">yes!</button>
+            <button id="confirmNo" class="btn btn-outline-primary float-right" type="button" style="color: red;outline-color: red;box-shadow: none;border-color: red;margin-right: 10vh;">no!</button></div>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="chatoptionsmodal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">chat options</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h5 class="text-center" style="margin-top: 1vh;">__ &nbsp;<i class="fa fa-user" style="color: #f4476b;"></i>&nbsp; __<br></h5>
+          <button onclick="$('.modal').modal('hide');$('#addToChatModal').modal()" class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;">add
+            user</button>
+          <button onclick="$('.modal').modal('hide');$('#notavailible').modal()" <button class="btn btn-outline-primary btn-block" type="button"
+            style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;">change chat name</button>
+          <button onclick="$('.modal').modal('hide');leaveChat()" class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;">leave chat</button>
+          <h5 class="text-center" style="margin-top: 1vh;">__ &nbsp;<i class="fa fa-trash" style="color: #f4476b;"></i>&nbsp; __<br></h5>
+          <button id="deleteLast10ChatsButton" class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;">delete last 10 messages</button>
+          <button id="deleteallchatsbutton" class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;">delete all messages</button><button
+            id="purgechatbutton" class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;">purge chat</button>
+        </div>
+        <div class="modal-footer"><button class="btn btn-primary" type="button" style="background-color: #f4476b;border-color:transparent!important" data-dismiss="modal">done</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="notavailible">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">tratchat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center">oops!</h1>
+          <h5 class="text-center">This option is not availible yet!</h5>
+          <h5 class="text-center">its coming soon :)</h5>
+        </div>
+        <div class="modal-footer"><button class="btn btn-primary" type="button" style="background-color: #f4476b;/*outline-color: transparent;*/border-color: transparent;" data-dismiss="modal">done</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="startAChatModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">start a chat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-inline"><input id="startChatInput" class="form-control" type="text" placeholder="Enter Your Friend's Username" style="width: 80%;"><button class="btn btn-primary" type="button"
+              style="background-color: #f4476b;border-color: transparent;width: 15%;margin-left: 5%;" onclick="startChatSearch()"><i class="fa fa-search" style="font-size: 19px;"></i></button></form>
+          <div id="startChatResults" class="hideOnChange">
+            <h5 class="text-center" style="margin-top: 2vh;">Results</h5>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center">
+                  <div class="col-3">
+                    <i id="startChatResultsIcon" class="far" style="font-size:6vh;"></i>
+                  </div>
+                  <div class="col">
+                    <h6 id="startChatResultsName" style="font-size: 3.5vh;"></h6>
+                    <h6 id="startChatResultsUsername" style="font-size: 2vh;"></h6>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="d-lg-flex justify-content-lg-center" style="margin-top: 4vh;"><button id="startChatButton" class="btn btn-primary" type="button" style="background-color: #f4476b;border-color: transparent;" data-dismiss="modal">Start
+                Chat</button></div>
+          </div>
+          <ul id="startChatNotFOund" class="list-group hideOnChange" style="margin-top:5vh">
+            <li class="list-group-item">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col text-center">
+                  <h6 style="font-size: 3.5vh;">No Results Found</h6>
+                  <h6 style="font-size: 2vh;">Please Try Again.</h6>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+          <ul id="startChatYouself" class="list-group hideOnChange" style="margin-top:5vh">
+
+            <li class="list-group-item">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col text-center">
+                  <h6 style="font-size: 3.5vh;">Anyone But You!</h6>
+                  <h6 style="font-size: 2vh;">Please Try Again.</h6>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="startAChatModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">start a chat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-inline"><input id="startChatInput" class="form-control" type="text" placeholder="Enter Your Friend's Username" style="width: 80%;"><button class="btn btn-primary" type="button"
+              style="background-color: #f4476b;border-color: transparent;width: 15%;margin-left: 5%;" onclick="startChatSearch()"><i class="fa fa-search" style="font-size: 19px;"></i></button></form>
+          <div id="startChatResults" class="hideOnChange">
+            <h5 class="text-center" style="margin-top: 2vh;">Results</h5>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center">
+                  <div class="col-3">
+                    <i id="startChatResultsIcon" class="far" style="font-size:6vh;"></i>
+                  </div>
+                  <div class="col">
+                    <h6 id="startChatResultsName" style="font-size: 3.5vh;"></h6>
+                    <h6 id="startChatResultsUsername" style="font-size: 2vh;"></h6>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="d-lg-flex justify-content-lg-center" style="margin-top: 4vh;"><button id="startChatButton" class="btn btn-primary" type="button" style="background-color: #f4476b;border-color: transparent;" data-dismiss="modal">Start
+                Chat</button></div>
+          </div>
+          <ul id="startChatNotFOund" class="list-group hideOnChange" style="margin-top:5vh">
+            <li class="list-group-item">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col text-center">
+                  <h6 style="font-size: 3.5vh;">No Results Found</h6>
+                  <h6 style="font-size: 2vh;">Please Try Again.</h6>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+          <ul id="startChatYouself" class="list-group hideOnChange" style="margin-top:5vh">
+
+            <li class="list-group-item">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col text-center">
+                  <h6 style="font-size: 3.5vh;">Anyone But You!</h6>
+                  <h6 style="font-size: 2vh;">Please Try Again.</h6>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <main id="accountPage">
+    <div class="row" style="width: 100vw;">
+      <div class="col-xl-3" style="padding-left: 0px!important;width: 20vw!important;padding-right: 0px!important;background-color: white;height: 100vh;">
+        <ul class="list-group" style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;background-color: transparent;">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;background-color: transparent;border-color: transparent;padding-right: 0px;padding-left: 0px;">
+            <h1 class="text-center" style="color: #f4476b;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">tratchat</h1>
+            <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5><button class="btn btn-outline-primary btn-block" type="button"
+              style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('chatsPage')">chats</button>
+            <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
+              onclick="go('accountPage')">account</button><button class="btn btn-outline-primary btn-block" type="button"
+              style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('dataPage')">data &amp; privacy</button>
+            <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
+              onclick="location.href='https://tratchat.com'"> return to home </button>
+          </li>
+        </ul>
+      </div>
+      <div class="col" style="background-color: white;">
+        <ul class="list-group">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;border-bottom-color: transparent;border-left-color: transparent;border-right-color: transparent;">
+            <h3 class="text-center" style="color: #f4476b;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">Your Account</h3>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li class="list-group-item" style="padding-bottom: 30px;">
+            <ul class="list-group">
+              <li class="list-group-item"
+                style="/*background-color: transparent;*//*border-top-right-radius: 0px !important;*//*border-top-left-radius: 0px !important;*//*border-bottom-right-radius: 0px !important;*//*border-bottom-left-radius: 0px !important;*//*border-left-color: transparent;*//*border-right-color: transparent;*/">
+                <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+                  <div class="col-3" style="height: 100%;">
+                    <i id="accountIcon" class="far" style="font-size:6vh;"></i></div>
+                  <div class="col">
+                    <h6 id="accountName" style="font-size: 1.5vw;"></h6>
+                    <h6 id="accountUsername" style="font-size: 1vw;"></h6>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="d-xl-flex justify-content-xl-center text-center"><span style="font-size: 24px;">__ &nbsp;&nbsp;<i class="fa fa-user" style="color: #f4476b;"></i>&nbsp; __</span></div>
+            <form class="form-inline" style="margin-top: 5vh;"><input id="accountNewNameInput" class="form-control" type="text" placeholder="New Name" style="width: 80%;"><button onclick="changeName()" class="btn btn-primary" type="button"
+                style="width: 15%;margin-left: 5%;border-color: transparent;background-color: #f4476b;"><i class="fa fa-check"></i></button></form>
+            <form class="form-inline" style="margin-top: 5vh;"><input id="accountNewUsernameInput" class="form-control" type="text" placeholder="New Username" style="width: 80%;"><button onclick="changeUsername()" class="btn btn-primary"
+                type="button" style="width: 15%;margin-left: 5%;border-color: transparent;background-color: #f4476b;"><i class="fa fa-check"></i></button></form>
+          </li>
+        </ul>
+      </div>
+      <div class="col" style="background-color: white;">
+        <ul class="list-group">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;border-bottom-color: transparent;border-left-color: transparent;border-right-color: transparent;">
+            <h3 class="text-center" style="color: transparent;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">Your Account</h3>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li class="list-group-item" id="iconsHolder" style="height: 25vh;overflow-y: scroll;">
+          </li>
+          <li class="list-group-item text-center" style="padding-left: 0px;padding-right: 0px;"><span class="badge badge-pill badge-primary" style="margin-bottom: 1vh;margin-right: 1vw;background-color: #0072c6;">Blue</span><span
+              class="badge badge-primary" style="margin-bottom: 1vh;margin-right: 1vw;"></span><span class="badge badge-primary" style="margin-bottom: 1vh;margin-right: 1vw;"></span><span class="badge badge-primary"
+              style="margin-bottom: 1vh;margin-right: 1vw;"></span><span class="badge badge-primary" style="margin-bottom: 1vh;margin-right: 1vw;"></span>
+            <span class="badge badge-pill badge-primary" style="margin-bottom: 1vh;margin-right: 1vw;background-color: #00b760;">Green</span><span class="badge badge-pill badge-primary"
+              style="margin-bottom: 1vh;margin-right: 1vw;background-color: #f4476b;">Pink</span><span class="badge badge-pill badge-primary" style="margin-bottom: 1vh;margin-right: 1vw;background-color: #8c60c1;">Purple</span>
+            <span class="badge badge-pill badge-primary" style="margin-bottom: 1vh;margin-right: 1vw;background-color: #f95602;">Orange</span>
+            <div class="text-center d-xl-flex justify-content-xl-center align-items-xl-center" style="margin-top: 2vh;height: 36px;">
+              <form class="form-inline text-center d-sm-flex d-xl-flex justify-content-sm-center justify-content-xl-center">
+                <i id="setIcon" class="" style="font-size: 36px;margin-right: 2vw;"></i><button id="changeIcon" class="btn btn-primary" type="button" style="background-color: #f4476b;border-color: transparent;height: 36px!important;"><i
+                    class="fa fa-check"></i></button></form>
+            </div>
+          </li>
+        </ul>
+        <ul class="list-group" style="margin-top: 4vh;">
+          <li class="list-group-item">
+            <div class="d-xl-flex justify-content-xl-center text-center"><span style="font-size: 24px;">__ &nbsp;&nbsp;<i class="fa fa-file" style="color: #f4476b;"></i>&nbsp; __</span></div>
+            <h4 class="text-center">coming soon</h4>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+  <div class="modal fade" role="dialog" tabindex="-1" id="usernametakenmodal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">tratchat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center">Oh No!</h1>
+          <h5 class="text-center">username taken</h5>
+        </div>
+        <div class="modal-footer"><button class="btn btn-primary" type="button" style="background-color: #f4476b;/*outline-color: transparent;*/border-color: transparent;" data-dismiss="modal">done</button></div>
+      </div>
+    </div>
+  </div>
+  <main id="dataPage">
+    <div class="row" style="width: 100vw;">
+      <div class="col-xl-3" style="padding-left: 0px!important;width: 20vw!important;padding-right: 0px!important;background-color: white;height: 100vh;">
+        <ul class="list-group" style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;background-color: transparent;">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;background-color: transparent;border-color: transparent;padding-right: 0px;padding-left: 0px;">
+            <h1 class="text-center" style="color: #f4476b;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">tratchat</h1>
+            <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5><button class="btn btn-outline-primary btn-block" type="button"
+              style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('chatsPage')">chats</button>
+            <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
+              onclick="go('accountPage')">account</button><button class="btn btn-outline-primary btn-block" type="button"
+              style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('dataPage')">data &amp; privacy</button>
+            <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
+              onclick="location.href='https://tratchat.com'"> return to home </button>
+          </li>
+        </ul>
+      </div>
+      <div class="col" style="background-color: white;">
+        <ul class="list-group">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;border-bottom-color: transparent;border-left-color: transparent;border-right-color: transparent;">
+            <h3 class="text-center" style="color: #f4476b;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">Data And Privacy</h3>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li class="list-group-item" style="padding-bottom: 30px;">
+            <ul class="list-group"></ul>
+            <div class="d-xl-flex justify-content-xl-center text-center"><span style="font-size: 24px;">__ &nbsp;&nbsp;<i class="far fa-list-alt" style="color: #f4476b;"></i>&nbsp; __</span></div>
+            <div>
+              <ul class="nav nav-tabs text-center d-xl-flex justify-content-xl-center" style="margin-top: 1vh;">
+                <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-1">&nbsp;Data Policy</a></li>
+                <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">We Dont Collect</a></li>
+                <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-3">Your Data</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane" role="tabpanel" id="tab-1">
+                  <p style="margin-top: 2vh;">very cool and informative paragraph about tratchats amazing data policy </p>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="tab-2">
+                  <ul class="list-group"></ul>
+                  <div class="col">
+                    <div class="container">
+                      <ul style="margin-top: 2vh;padding-left: 0px;width: 100%;">
+                        <li>any data about your location</li>
+                        <li>any identifable information (email, phone number, address)</li>
+                        <li>data about the device you are using</li>
+                        <li>any data that is not required for basic app functionality</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane active" role="tabpanel" id="tab-3">
+                  <div class="col">
+                    <div class="container">
+                      <ul style="margin-top: 2vh;padding-left: 0px;width: 100%;">
+                        <li><span id="dataEncryptedMessages"><span class="spinner-border spinner-border-sm text-center" role="status" style="color: rgb(136,136,136); width: 14px;height: 14px; padding-bottom: 4px"></span></span>&nbsp;encrypted
+                          messages&nbsp;<i class="fa fa-lock"></i></li>
+                        <li><span id="dataChats"><span class="spinner-border spinner-border-sm text-center" role="status" style="color: rgb(136,136,136); width: 14px;height: 14px; padding-bottom: 4px"></span></span>&nbsp;chats&nbsp;</li>
+                        <li>your username and name</li>
+                        <li>a hash of your password&nbsp;<i class="fa fa-lock"></i></li>
+                        <li>your encrypted private key&nbsp;<i class="fa fa-lock"></i>&nbsp;</li>
+                        <li>your public key&nbsp;</li>
+                      </ul>
+                      <hr>
+                      <h6><i class="fa fa-lock"></i>&nbsp;means we cannot see the contents of this data, it is just on our servers&nbsp;</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul class="list-group" style="margin-top: 4vh;"></ul>
+        <ul class="list-group" id="bridgeServerListGroup">
+          <li class="list-group-item">
+            <div class="d-xl-flex justify-content-xl-center text-center"><span style="font-size: 24px;">__ &nbsp;&nbsp;<i class="fas fa-link" style="color: #f4476b;"></i>&nbsp; __</span></div>
+            <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+              <div class="col">
+                <h6 class="text-left">current bridge:</h6>
+                <h6 class="text-left" style="font-size: 14px;color: rgb(80,94,108);">Not Availible On Web App<span class="float-right">Ping: <span id="currentPing" style="color: rgb(66,203,66);"><span
+                        class="spinner-border spinner-border-sm text-center" role="status" style="color: rgb(136,136,136); width: 14px;height: 14px; padding-bottom: 4px"></span>&nbsp;ms</span>&nbsp;<i onclick="doPing()"
+                      class="fa fa-refresh"></i></span>
+                </h6>
+                <hr><button class="btn btn-primary" type="button" disabled="disabled" style="width: 80%;margin-right: 10%;margin-left: 10%;border-color: transparent;background-color: #f4476b;">connect to a new bridge</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col" style="background-color: white;">
+        <ul class="list-group">
+          <li class="list-group-item"
+            style="border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;border-bottom-color: transparent;border-left-color: transparent;border-right-color: transparent;">
+            <h3 class="text-center" style="color: transparent;font-family: 'Fredoka One', cursive;margin-bottom: 0px;">Your Account</h3>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+              <div class="col">
+                <h5 class="text-center" style="margin-top: 0px;">__ &nbsp;<i class="fas fa-trash" style="color: #f4476b;"></i>&nbsp; __<br></h5>
+                <h6 class="text-center">purging data allows you delete any data from tratchats servers and all other user's devices &nbsp;</h6>
+                <h6 class="text-center"><strong>immediately</strong>&nbsp;and&nbsp;<strong>permanently</strong>&nbsp;</h6>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col">
+                <h5 class="text-center" style="margin-top: 0px;">__ &nbsp;<i class="fas fa-user-slash" style="color: #f4476b;"></i>&nbsp; __<br></h5>
+              </div>
+            </div><button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;" onclick="purgeAccount()">purge my account</button>
+            <h6 class="text-center" style="margin-top: 1vh;">Delete <strong>ALL </strong>data associated with your account immediatly, erasing all evidence you ever existed on the tratchat platform.</h6>
+          </li>
+          <li class="list-group-item">
+            <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+              <div class="col">
+                <h5 class="text-center" style="margin-top: 0px;">__ &nbsp;<i class="fas fa-comment-slash" style="color: #f4476b;"></i>&nbsp; __<br></h5><button class="btn btn-outline-primary btn-block" type="button"
+                  style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;" id="purgeChatsButton">purge my chat history</button>
+                <h6 class="text-center" style="margin-top: 1vh;">Delete chats and messages you have sent or received on that tratchat platform. This will delete chats on other users devices as well.</h6>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+              <div class="col">
+                <h6 class="text-center">Help!</h6>
+                <h6 class="text-center">I want to purge an individual chat</h6>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="mobileModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">tratchat</h3><button type="button" class="close" data-dismiss="modal"
+              aria-label="Close"><span aria-hidden="true">×</span></button>
+          </div>
+          <div class="modal-body">
+            <h1 class="text-center">Oh No!</h1>
+            <h5 class="text-center">tratchat web is not availible on mobile devices.</h5>
+            <h5 class="text-center"></h5><a class="btn btn-primary text-center d-flex justify-content-center" role="button" href="https://tratchat.com/#download"
+              style="background-color: #eb3b60;border-color: transparent;width: 80%;margin-right: 10%;margin-left: 10%;">see other optons&nbsp;</a>
+            <h5 class="text-center"></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="modal fade" role="dialog" tabindex="-1" id="addToChatModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">add to chat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-inline"><input id="addChatInput" class="form-control" type="text" placeholder="Enter Your Friend's Username" style="width: 80%;"><button class="btn btn-primary" type="button"
+              style="background-color: #f4476b;border-color: transparent;width: 15%;margin-left: 5%;" onclick="addChatSearch()"><i class="fa fa-search" style="font-size: 19px;"></i></button></form>
+          <div id="addChatResults" class="hideOnChange">
+            <h5 class="text-center" style="margin-top: 2vh;">Results</h5>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center">
+                  <div class="col-3">
+                    <i id="addChatResultsIcon" class="far" style="font-size:6vh;"></i>
+                  </div>
+                  <div class="col">
+                    <h6 id="addChatResultsName" style="font-size: 3.5vh;"></h6>
+                    <h6 id="addChatResultsUsername" style="font-size: 2vh;"></h6>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="d-lg-flex justify-content-lg-center" style="margin-top: 4vh;"><button id="addChatButton" class="btn btn-primary" type="button" style="background-color: #f4476b;border-color: transparent;" data-dismiss="modal"> Add To Chat
+              </button></div>
+          </div>
+          <ul id="addChatNotFOund" class="list-group hideOnChange" style="margin-top:5vh">
+            <li class="list-group-item">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col text-center">
+                  <h6 style="font-size: 3.5vh;">No Results Found</h6>
+                  <h6 style="font-size: 2vh;">Please Try Again.</h6>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+          <ul id="addChatYouself" class="list-group hideOnChange" style="margin-top:5vh">
+
+            <li class="list-group-item">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col text-center">
+                  <h6 style="font-size: 3.5vh;">Anyone But You!</h6>
+                  <h6 style="font-size: 2vh;">Please Try Again.</h6>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul id="addChatAlready" class="list-group hideOnChange" style="margin-top:5vh">
+
+            <li class="list-group-item">
+              <div class="row d-flex justify-content-center align-items-center">
+                <div class="col text-center">
+                  <h6 style="font-size: 3.5vh;">User Already Added!</h6>
+                  <h6 style="font-size: 2vh;">Please Try Again.</h6>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.trat.chat/kbpgp-2.0.8-min.js"></script>
+
+  <script>
+    // Copyright (c) 2013 Pieroxy <pieroxy@pieroxy.net>
+    // This work is free. You can redistribute it and/or modify it
+    // under the terms of the WTFPL, Version 2
+    // For more information see LICENSE.txt or http://www.wtfpl.net/
+    //
+    // For more information, the home page:
+    // http://pieroxy.net/blog/pages/lz-string/testing.html
+    //
+    // LZ-based compression algorithm, version 1.4.4
+    var LZString = (function() {
+
+      // private property
+      var f = String.fromCharCode;
+      var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+      var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+      var baseReverseDic = {};
+
+      function getBaseValue(alphabet, character) {
+        if (!baseReverseDic[alphabet]) {
+          baseReverseDic[alphabet] = {};
+          for (var i = 0; i < alphabet.length; i++) {
+            baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+          }
+        }
+        return baseReverseDic[alphabet][character];
+      }
+
+      var LZString = {
+        compressToBase64: function(input) {
+          if (input == null) return "";
+          var res = LZString._compress(input, 6, function(a) {
+            return keyStrBase64.charAt(a);
+          });
+          switch (res.length % 4) { // To produce valid Base64
+            default: // When could this happen ?
+            case 0:
+              return res;
+            case 1:
+              return res + "===";
+            case 2:
+              return res + "==";
+            case 3:
+              return res + "=";
+          }
+        },
+
+        decompressFromBase64: function(input) {
+          if (input == null) return "";
+          if (input == "") return null;
+          return LZString._decompress(input.length, 32, function(index) {
+            return getBaseValue(keyStrBase64, input.charAt(index));
+          });
+        },
+
+        compressToUTF16: function(input) {
+          if (input == null) return "";
+          return LZString._compress(input, 15, function(a) {
+            return f(a + 32);
+          }) + " ";
+        },
+
+        decompressFromUTF16: function(compressed) {
+          if (compressed == null) return "";
+          if (compressed == "") return null;
+          return LZString._decompress(compressed.length, 16384, function(index) {
+            return compressed.charCodeAt(index) - 32;
+          });
+        },
+
+        //compress into uint8array (UCS-2 big endian format)
+        compressToUint8Array: function(uncompressed) {
+          var compressed = LZString.compress(uncompressed);
+          var buf = new Uint8Array(compressed.length * 2); // 2 bytes per character
+
+          for (var i = 0, TotalLen = compressed.length; i < TotalLen; i++) {
+            var current_value = compressed.charCodeAt(i);
+            buf[i * 2] = current_value >>> 8;
+            buf[i * 2 + 1] = current_value % 256;
+          }
+          return buf;
+        },
+
+        //decompress from uint8array (UCS-2 big endian format)
+        decompressFromUint8Array: function(compressed) {
+          if (compressed === null || compressed === undefined) {
+            return LZString.decompress(compressed);
+          } else {
+            var buf = new Array(compressed.length / 2); // 2 bytes per character
+            for (var i = 0, TotalLen = buf.length; i < TotalLen; i++) {
+              buf[i] = compressed[i * 2] * 256 + compressed[i * 2 + 1];
+            }
+
+            var result = [];
+            buf.forEach(function(c) {
+              result.push(f(c));
+            });
+            return LZString.decompress(result.join(''));
+
+          }
+
+        },
+
+
+        //compress into a string that is already URI encoded
+        compressToEncodedURIComponent: function(input) {
+          if (input == null) return "";
+          return LZString._compress(input, 6, function(a) {
+            return keyStrUriSafe.charAt(a);
+          });
+        },
+
+        //decompress from an output of compressToEncodedURIComponent
+        decompressFromEncodedURIComponent: function(input) {
+          if (input == null) return "";
+          if (input == "") return null;
+          input = input.replace(/ /g, "+");
+          return LZString._decompress(input.length, 32, function(index) {
+            return getBaseValue(keyStrUriSafe, input.charAt(index));
+          });
+        },
+
+        compress: function(uncompressed) {
+          return LZString._compress(uncompressed, 16, function(a) {
+            return f(a);
+          });
+        },
+        _compress: function(uncompressed, bitsPerChar, getCharFromInt) {
+          if (uncompressed == null) return "";
+          var i, value,
+            context_dictionary = {},
+            context_dictionaryToCreate = {},
+            context_c = "",
+            context_wc = "",
+            context_w = "",
+            context_enlargeIn = 2, // Compensate for the first entry which should not count
+            context_dictSize = 3,
+            context_numBits = 2,
+            context_data = [],
+            context_data_val = 0,
+            context_data_position = 0,
+            ii;
+
+          for (ii = 0; ii < uncompressed.length; ii += 1) {
+            context_c = uncompressed.charAt(ii);
+            if (!Object.prototype.hasOwnProperty.call(context_dictionary, context_c)) {
+              context_dictionary[context_c] = context_dictSize++;
+              context_dictionaryToCreate[context_c] = true;
+            }
+
+            context_wc = context_w + context_c;
+            if (Object.prototype.hasOwnProperty.call(context_dictionary, context_wc)) {
+              context_w = context_wc;
+            } else {
+              if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
+                if (context_w.charCodeAt(0) < 256) {
+                  for (i = 0; i < context_numBits; i++) {
+                    context_data_val = (context_data_val << 1);
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                  }
+                  value = context_w.charCodeAt(0);
+                  for (i = 0; i < 8; i++) {
+                    context_data_val = (context_data_val << 1) | (value & 1);
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                    value = value >> 1;
+                  }
+                } else {
+                  value = 1;
+                  for (i = 0; i < context_numBits; i++) {
+                    context_data_val = (context_data_val << 1) | value;
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                    value = 0;
+                  }
+                  value = context_w.charCodeAt(0);
+                  for (i = 0; i < 16; i++) {
+                    context_data_val = (context_data_val << 1) | (value & 1);
+                    if (context_data_position == bitsPerChar - 1) {
+                      context_data_position = 0;
+                      context_data.push(getCharFromInt(context_data_val));
+                      context_data_val = 0;
+                    } else {
+                      context_data_position++;
+                    }
+                    value = value >> 1;
+                  }
+                }
+                context_enlargeIn--;
+                if (context_enlargeIn == 0) {
+                  context_enlargeIn = Math.pow(2, context_numBits);
+                  context_numBits++;
+                }
+                delete context_dictionaryToCreate[context_w];
+              } else {
+                value = context_dictionary[context_w];
+                for (i = 0; i < context_numBits; i++) {
+                  context_data_val = (context_data_val << 1) | (value & 1);
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = value >> 1;
+                }
+
+
+              }
+              context_enlargeIn--;
+              if (context_enlargeIn == 0) {
+                context_enlargeIn = Math.pow(2, context_numBits);
+                context_numBits++;
+              }
+              // Add wc to the dictionary.
+              context_dictionary[context_wc] = context_dictSize++;
+              context_w = String(context_c);
+            }
+          }
+
+          // Output the code for w.
+          if (context_w !== "") {
+            if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
+              if (context_w.charCodeAt(0) < 256) {
+                for (i = 0; i < context_numBits; i++) {
+                  context_data_val = (context_data_val << 1);
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                }
+                value = context_w.charCodeAt(0);
+                for (i = 0; i < 8; i++) {
+                  context_data_val = (context_data_val << 1) | (value & 1);
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = value >> 1;
+                }
+              } else {
+                value = 1;
+                for (i = 0; i < context_numBits; i++) {
+                  context_data_val = (context_data_val << 1) | value;
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = 0;
+                }
+                value = context_w.charCodeAt(0);
+                for (i = 0; i < 16; i++) {
+                  context_data_val = (context_data_val << 1) | (value & 1);
+                  if (context_data_position == bitsPerChar - 1) {
+                    context_data_position = 0;
+                    context_data.push(getCharFromInt(context_data_val));
+                    context_data_val = 0;
+                  } else {
+                    context_data_position++;
+                  }
+                  value = value >> 1;
+                }
+              }
+              context_enlargeIn--;
+              if (context_enlargeIn == 0) {
+                context_enlargeIn = Math.pow(2, context_numBits);
+                context_numBits++;
+              }
+              delete context_dictionaryToCreate[context_w];
+            } else {
+              value = context_dictionary[context_w];
+              for (i = 0; i < context_numBits; i++) {
+                context_data_val = (context_data_val << 1) | (value & 1);
+                if (context_data_position == bitsPerChar - 1) {
+                  context_data_position = 0;
+                  context_data.push(getCharFromInt(context_data_val));
+                  context_data_val = 0;
+                } else {
+                  context_data_position++;
+                }
+                value = value >> 1;
+              }
+
+
+            }
+            context_enlargeIn--;
+            if (context_enlargeIn == 0) {
+              context_enlargeIn = Math.pow(2, context_numBits);
+              context_numBits++;
+            }
+          }
+
+          // Mark the end of the stream
+          value = 2;
+          for (i = 0; i < context_numBits; i++) {
+            context_data_val = (context_data_val << 1) | (value & 1);
+            if (context_data_position == bitsPerChar - 1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+
+          // Flush the last char
+          while (true) {
+            context_data_val = (context_data_val << 1);
+            if (context_data_position == bitsPerChar - 1) {
+              context_data.push(getCharFromInt(context_data_val));
+              break;
+            } else context_data_position++;
+          }
+          return context_data.join('');
+        },
+
+        decompress: function(compressed) {
+          if (compressed == null) return "";
+          if (compressed == "") return null;
+          return LZString._decompress(compressed.length, 32768, function(index) {
+            return compressed.charCodeAt(index);
+          });
+        },
+
+        _decompress: function(length, resetValue, getNextValue) {
+          var dictionary = [],
+            next,
+            enlargeIn = 4,
+            dictSize = 4,
+            numBits = 3,
+            entry = "",
+            result = [],
+            i,
+            w,
+            bits, resb, maxpower, power,
+            c,
+            data = {
+              val: getNextValue(0),
+              position: resetValue,
+              index: 1
+            };
+
+          for (i = 0; i < 3; i += 1) {
+            dictionary[i] = i;
+          }
+
+          bits = 0;
+          maxpower = Math.pow(2, 2);
+          power = 1;
+          while (power != maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb > 0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+
+          switch (next = bits) {
+            case 0:
+              bits = 0;
+              maxpower = Math.pow(2, 8);
+              power = 1;
+              while (power != maxpower) {
+                resb = data.val & data.position;
+                data.position >>= 1;
+                if (data.position == 0) {
+                  data.position = resetValue;
+                  data.val = getNextValue(data.index++);
+                }
+                bits |= (resb > 0 ? 1 : 0) * power;
+                power <<= 1;
+              }
+              c = f(bits);
+              break;
+            case 1:
+              bits = 0;
+              maxpower = Math.pow(2, 16);
+              power = 1;
+              while (power != maxpower) {
+                resb = data.val & data.position;
+                data.position >>= 1;
+                if (data.position == 0) {
+                  data.position = resetValue;
+                  data.val = getNextValue(data.index++);
+                }
+                bits |= (resb > 0 ? 1 : 0) * power;
+                power <<= 1;
+              }
+              c = f(bits);
+              break;
+            case 2:
+              return "";
+          }
+          dictionary[3] = c;
+          w = c;
+          result.push(c);
+          while (true) {
+            if (data.index > length) {
+              return "";
+            }
+
+            bits = 0;
+            maxpower = Math.pow(2, numBits);
+            power = 1;
+            while (power != maxpower) {
+              resb = data.val & data.position;
+              data.position >>= 1;
+              if (data.position == 0) {
+                data.position = resetValue;
+                data.val = getNextValue(data.index++);
+              }
+              bits |= (resb > 0 ? 1 : 0) * power;
+              power <<= 1;
+            }
+
+            switch (c = bits) {
+              case 0:
+                bits = 0;
+                maxpower = Math.pow(2, 8);
+                power = 1;
+                while (power != maxpower) {
+                  resb = data.val & data.position;
+                  data.position >>= 1;
+                  if (data.position == 0) {
+                    data.position = resetValue;
+                    data.val = getNextValue(data.index++);
+                  }
+                  bits |= (resb > 0 ? 1 : 0) * power;
+                  power <<= 1;
+                }
+
+                dictionary[dictSize++] = f(bits);
+                c = dictSize - 1;
+                enlargeIn--;
+                break;
+              case 1:
+                bits = 0;
+                maxpower = Math.pow(2, 16);
+                power = 1;
+                while (power != maxpower) {
+                  resb = data.val & data.position;
+                  data.position >>= 1;
+                  if (data.position == 0) {
+                    data.position = resetValue;
+                    data.val = getNextValue(data.index++);
+                  }
+                  bits |= (resb > 0 ? 1 : 0) * power;
+                  power <<= 1;
+                }
+                dictionary[dictSize++] = f(bits);
+                c = dictSize - 1;
+                enlargeIn--;
+                break;
+              case 2:
+                return result.join('');
+            }
+
+            if (enlargeIn == 0) {
+              enlargeIn = Math.pow(2, numBits);
+              numBits++;
+            }
+
+            if (dictionary[c]) {
+              entry = dictionary[c];
+            } else {
+              if (c === dictSize) {
+                entry = w + w.charAt(0);
+              } else {
+                return null;
+              }
+            }
+            result.push(entry);
+
+            // Add w+entry[0] to the dictionary.
+            dictionary[dictSize++] = w + entry.charAt(0);
+            enlargeIn--;
+
+            w = entry;
+
+            if (enlargeIn == 0) {
+              enlargeIn = Math.pow(2, numBits);
+              numBits++;
+            }
+
+          }
+        }
+      };
+      return LZString;
+    })();
+
+    if (typeof define === 'function' && define.amd) {
+      define(function() {
+        return LZString;
+      });
+    } else if (typeof module !== 'undefined' && module != null) {
+      module.exports = LZString
+    } else if (typeof angular !== 'undefined' && angular != null) {
+      angular.module('LZString', [])
+        .factory('LZString', function() {
+          return LZString;
+        });
+    }
+  </script>
+  <script src="https://cdn.trat.chat/jquery.min.js"></script>
+  <script src="https://cdn.trat.chat/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdn.trat.chat/aes.js"></script>
+  <script src="https://cdn.trat.chat/scrypt.js" type="text/javascript"></script>
+  <script src="https://cdn.trat.chat/buffer.js" type="text/javascript"></script>
+  <script>
+    window.mobilecheck = function() {
+      var check = false;
+      (function(a) {
+        if (
+          /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i
+          .test(a) ||
+          /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i
+          .test(a.substr(0, 4))) check = true;
+      })(navigator.userAgent || navigator.vendor || window.opera);
+      return check;
+    };
+    if (window.mobilecheck()) {
+      alert("Unfortunately tratchat web app is not availible on mobile devices.")
+      location.href = "https://tratchat.com"
+    }
+  </script>
+  <script>
+    hideAll()
+    go("startScreenPage")
+
+    function encryptedBridgeRequest(options, callback) {
+
+      const serverPublic = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+    Version: Tratchat OpenPGP v1.0
+    Comment: https://tratchat.com || credit to keybase
+
+    xm8EXL/GDhMFK4EEACIDAwQXPGDRZitEXembe2qftob3wf7AbHhFaYVWMjIO0I0b
+    1N38QvDwOY01KVWCR+RZIlEVBrScfEurfYp/KAWL0Mq+3iiKD9QlrfyBGYMhnCQ4
+    aJmpZ+1qktTYwOvVJMyeCpTNBnNlcnZlcsKSBBMTCgAaBQJcv8YOAhsBAwsJBwMV
+    CggCHgECF4ACGQEACgkQEg/f56H5sRhOYgF5AY9PxbEUyJbNZfoOJB4mJOAXYvM3
+    U7WdmqVXmynpe6A/Ef+RigAAe6WyaYHzOOrbAYCGa0VOFqfXUYH3JS327G7rxPOF
+    lHlufU2TdEa82N3G5h9SaukSJ7t9o/mkMV/Z2lPOVgRcv8YOEggqhkjOPQMBBwID
+    BGEPUNOi8af4WMjFn72ouhVvaR14RhHfW3cTmcX1sG7yBk9KAT2C9k6EBIwPRFJV
+    KwiU96hDz1fH+WQXpGb8WiwDAQoJwocEGBMKAA8FAly/xg4FCQ8JnAACGwQACgkQ
+    Eg/f56H5sRiXLgGAxK1HnoWLVyTNyej1Hni2KI/ZZd2E+thil1fFDDS8zkGma72l
+    /wvMwKLGaos1nU/WAX0aC4T0hQBdD55314C2LN+Jpo3LNz+hCUcQ6f21de9vdJ2C
+    So3vTh01V5/zOMqiDsvOUgRcv8YOEwgqhkjOPQMBBwIDBDITiY9LEYnrpT1DLjF3
+    Plmpx/r3dcRe1FU3Z+KT9ugvELZ32eDO7zMk+U/E1fJsFjlFBIfcUCLbAlUqjrzl
+    5MHCwCcEGBMKAA8FAly/xg4FCQ8JnAACGyIAagkQEg/f56H5sRhfIAQZEwoABgUC
+    XL/GDgAKCRBFSz47NxWKLDnXAQD/mV5bYeHroX8ZBRCTjjMePJ7izbDkhEVeDYaa
+    SG7jhgD/eQw9zXzOWVtcmIXlxClDLI/Ho29BB+T7DGQD//aRusMkOwF+LqeRGiQT
+    xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
+    3otoouLXS27sHS/szvgYJzR1R7MqyQxQ8odRvQJewHjAENOlJrBeSBRYk6c=
+    =CsAL
+-----END PGP PUBLIC KEY BLOCK-----
+
+`
+      var bridge = options.bridge;
+      var path = options.path;
+      var privateKey = options.privateKey;
+      var publicKey = options.publicKey;
+      var data = options.data;
+
+      var randomKey = generateToken()
+
+      message = JSON.stringify({
+        path: path,
+        publicKey: publicKey,
+        randomKey: randomKey,
+        data: data
+      })
+      encryptMessage([serverPublic], message, function(encryptedData) {
+        var compressed = LZString.compressToUTF16(encryptedData).toString()
+        $.ajax({
+          type: 'POST',
+          url: bridge,
+          data: {
+            data: compressed
+          },
+          success: function(encryptedResponse) {
+            var body = LZString.decompressFromUTF16(encryptedResponse)
+            decryptMessage(privateKey, body, function(response) {
+              responseData = JSON.parse(response)
+              if (responseData.randomKey == randomKey) {
+                if (responseData.response == "invalid token.") {
+                  stopLoading();
+                  startLoading("you have been logged out.")
+                  setTimeout(function() {
+                    location.reload();
+                  }, 2000)
+                } else {
+
+                  callback(responseData.response, undefined)
+                }
+              } else {
+                callback(undefined, "Bridge Tried To Edit Data, Request Failed")
+              }
+            })
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            callback(undefined, "Request Error" + thrownError)
+          }
+        })
+      })
+
+    }
+
+    function confirm(message, yesCallback, noCallback) {
+      $('.modal').modal('hide');
+      $('#confirmText').html(message);
+      var dialog = $('#confirmmodal').modal();
+
+      $('#confirmYes').off("click").click(function() {
+        dialog.modal('hide');
+        yesCallback();
+      });
+      $('#confirmNo').off("click").click(function() {
+        dialog.modal('hide');
+        noCallback();
+      });
+    }
+
+    function startLoading(message) {
+      $('.modal').modal('hide');
+      $('#loadingmodaltext').html("<strong>" + message + "</strong>");
+      $('#fullpageloadingModal').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+    }
+
+    function stopLoading() {
+      $('#fullpageloadingModal').modal('hide');
+    }
+
+    function generateToken() {
+      var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+      var b = [];
+      for (var i = 0; i < 100; i++) {
+        var j = (Math.random() * (a.length - 1)).toFixed(0);
+        b[i] = a[j];
+      }
+      return b.join("");
+    }
+
+
+
+    function hideAll() {
+      $('main').hide();
+      $('.hideOnChange').hide()
+
+    }
+
+    function go(place) {
+      if (place == "chatsPage" && ((getData('currentPage') == "loginPage") || (getData('currentPage') == "signUpPage"))) {
+        setData("currentPage", place)
+        setUpChatsPage()
+
+      } else if (place == "chatsPage" && ((getData('currentPage') != "loginPage") && (getData('currentPage') != "signUpPage"))) {
+        setData("currentPage", place)
+
+        console.log("hello")
+        updateChats()
+      } else {
+        setData("currentPage", place)
+      }
+      hideAll();
+      if (place == "startScreenPage") {
+        doBridgeSetup()
+      }
+      if (place == "dataPage") {
+        doData()
+      }
+      $("#" + place).show();
+    }
+
+    function setUpChatsPage() {
+      doChats(true).then(function(response) {
+        if (response != "none") {
+          doChat(response).then(function(response) {
+            updateChats()
+            doRestSetup()
+          })
+        } else {
+          updateChats()
+          doRestSetup()
+
+        }
+      })
+    }
+
+    function doRestSetup() {
+      encryptedBridgeRequest({
+        path: "getUsername",
+        data: {
+          token: getData("token")
+        },
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response == "AHHHH") {
+            location.reload()
+          } else {
+            var data1 = JSON.parse(response)
+            $("#accountUsername").text("@" + preventHTMLinject(data1.username))
+            setData("yourUsername", preventHTMLinject(data1.username))
+            $("#accountName").text(preventHTMLinject(data1.name))
+            $("#accountIcon").addClass("fa-" + preventHTMLinject(data1.icon))
+            $("#accountIcon").css("color", preventHTMLinject(data1.color))
+          }
+        }
+      });
+      encryptedBridgeRequest({
+        path: "getIcons",
+        data: {},
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          console.log(err)
+        } else {
+          var data1 = JSON.parse(response)
+          for (var i = 0; i < data1.length; i++) {
+            $("#iconsHolder").append('<i class="displayicons far fa-' + preventHTMLinject(data1[i].name) + '" style="font-size: 3vw;margin-right: 1vh;margin-bottom: 1vh;"></i>')
+          }
+          $('.displayicons').css("color", "#f4476b");
+          $(".displayicons").click(function() {
+            $('#setIcon').css("color", $(this).css("color"));
+            $('#setIcon').removeClass();
+            var classList = $(this).attr('class').split(/\s+/);
+            $.each(classList, function(index, item) {
+              if (item != 'far') {
+                $('#setIcon').addClass("far")
+                $('#setIcon').addClass(preventHTMLinject(item))
+              }
+            });
+          })
+        }
+      });
+
+    }
+    $(".badge").click(function() {
+      $('.displayicons').css("color", $(this).css("backgroundColor"));
+    })
+    $("#changeIcon").click(function() {
+      startLoading("changing your icon...")
+      var classList = $("#setIcon").attr('class').split(/\s+/);
+      $.each(classList, function(index, item) {
+        if (item != 'far' && item != "displayicons") {
+          var icon = item.substring(3);
+          var color = $("#setIcon").css("color")
+          encryptedBridgeRequest({
+            path: "newIcon",
+            data: {
+              token: getData("token"),
+              color: color,
+              icon: icon
+            },
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal();
+            } else {
+              stopLoading()
+              $('#accountIcon').removeClass();
+              $("#accountIcon").addClass("far")
+              $("#accountIcon").addClass("fa-" + preventHTMLinject(icon))
+              $("#accountIcon").css("color", preventHTMLinject(color))
+            }
+          })
+        }
+      });
+    })
+
+    function doBridgeSetup() {
+      generateKeys(generateToken(), function(pub, priv) {
+        setData("publicKey", pub)
+        setData("privateKey", priv)
+        encryptedBridgeRequest({
+          path: "testBridge",
+          data: {},
+          privateKey: getData("privateKey"),
+          publicKey: getData("publicKey"),
+          bridge: getData("bridge")
+        }, function(response, err) {
+          if (err) {
+            $("#errorModal").modal();
+          } else {
+            console.log("connected Successfully")
+            go('welcomePage')
+          }
+        })
+      })
+
+    }
+
+
+
+    function login(username1, password1) {
+      startLoading("logging you in...")
+      if (password1 !== undefined) {
+        var username = username1;
+        var password = password1;
+      } else {
+        var username = $("#loginFormUsername").val();
+        var password = $("#loginFormPassword").val();
+      }
+      setData("yourUsername", username)
+
+      digestMessage(password).then(digestValue => {
+        passwordhash = hexString(digestValue);
+        data = {
+          username: username,
+          password: passwordhash
+        }
+        encryptedBridgeRequest({
+          path: "login",
+          data: data,
+          privateKey: getData("privateKey"),
+          publicKey: getData("publicKey"),
+          bridge: getData("bridge")
+        }, function(response, err) {
+          if (err) {
+            $("#errorModal").modal();
+            stopLoading()
+
+          } else {
+            //do things
+            if (response == "failed") {
+              stopLoading()
+              console.log("fail")
+              $("#loginfailed").modal();
+              $("input").val("")
+            } else {
+              response = JSON.parse(response);
+              setData("token", response.token)
+              setData("yourUsername", username)
+
+              console.log("success")
+              var password1 = new buffer.SlowBuffer(password.normalize('NFKC'));
+              var salt = new buffer.SlowBuffer("TratChatSaltingWowSoCool!".normalize('NFKC'));
+              var N = 1024,
+                r = 8,
+                p = 1;
+              var dkLen = 32;
+
+              scrypt(password1, salt, N, r, p, dkLen, function(error, progress, key) {
+                if (key != undefined) {
+
+                  decryptedPrivate = decryptAES(response.privateKey, key);
+                  setData("userPrivate", decryptedPrivate)
+                  go("chatsPage")
+                  stopLoading()
+
+                }
+              })
+            }
+
+          }
+        });
+
+
+      })
+
+
+
+    }
+
+    function signUp() {
+      startLoading("signing you up...")
+      var name = $("#signUpFormName").val()
+      var username = $("#signUpFormUsername").val()
+      var inputpassword = $("#signUpFormPassword").val()
+
+      generateKeys(generateToken(), function(pub, priv) {
+
+        digestMessage(inputpassword).then(digestValue1 => {
+          passwordhash = hexString(digestValue1);
+
+
+          var password = new buffer.SlowBuffer(inputpassword.normalize('NFKC'));
+          var salt = new buffer.SlowBuffer("TratChatSaltingWowSoCool!".normalize('NFKC'));
+          var N = 1024,
+            r = 8,
+            p = 1;
+          var dkLen = 32;
+
+          scrypt(password, salt, N, r, p, dkLen, function(error, progress, key) {
+            if (key != undefined) {
+
+              encryptedprivate = encryptAES(priv, key);
+
+              data = {
+                username: username,
+                passwordhash: passwordhash,
+                encryptedprivate: encryptedprivate,
+                public: pub,
+                name: name
+              }
+
+              encryptedBridgeRequest({
+                path: "createAccount",
+                data: data,
+                privateKey: getData("privateKey"),
+                publicKey: getData("publicKey"),
+                bridge: getData("bridge")
+              }, function(response, err) {
+                stopLoading()
+
+                if (err) {
+                  $("#errorModal").modal();
+                } else {
+                  if (response == "exists") {
+                    $("#signupFailed").modal()
+                    $("#signUpFormUsername").val();
+                  } else {
+                    console.log("register complete")
+                    login(username, inputpassword)
+                  }
+                }
+              })
+
+            }
+
+          });
+
+        })
+      })
+
+    }
+
+
+
+
+    function setData(name, data) {
+      $("data").find("[name='" + name + "']").attr("data", data)
+    }
+
+    function getData(name) {
+      return $("data").find("[name='" + name + "']").attr("data")
+    }
+
+    function encryptAES(text, password) {
+      var textBytes = aesjs.utils.utf8.toBytes(text);
+      // The counter is optional, and if omitted will begin at 1
+      var aesCtr = new aesjs.ModeOfOperation.ctr(password, new aesjs.Counter(5));
+      var encryptedBytes = aesCtr.encrypt(textBytes);
+
+      // To print or store the binary data, you may convert it to hex
+      var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+      return encryptedHex;
+    }
+
+    function decryptAES(text, password) {
+      var encryptedBytes = aesjs.utils.hex.toBytes(text);
+
+      // The counter mode of operation maintains internal state, so to
+      // decrypt a new instance must be instantiated.
+      var aesCtr = new aesjs.ModeOfOperation.ctr(password, new aesjs.Counter(5));
+      var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+
+      // Convert our bytes back into text
+      var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+      return decryptedText;
+    }
+
+
+
+    function fromPublic(public, callback) {
+      kbpgp.KeyManager.import_from_armored_pgp({
+        armored: public
+      }, function(err, alice) {
+        callback(alice)
+      });
+    }
+
+    function fromPrivate(private, callback) {
+      kbpgp.KeyManager.import_from_armored_pgp({
+        armored: private
+      }, function(err, alice) {
+        callback(alice)
+      });
+    }
+
+    function makeKeyRing(publicKeyArray, callback, array, index) {
+      fromPublic(publicKeyArray[index], function(response) {
+        array.push(response)
+        if (array.length == publicKeyArray.length) {
+          callback(array)
+        } else {
+          makeKeyRing(publicKeyArray, callback, array, index + 1)
+        }
+      })
+
+    }
+
+    function encryptMessage(publicKeyArray, message, callback) {
+      makeKeyRing(publicKeyArray, function(response) {
+        var opts = {
+          encrypt_for: response,
+          msg: message
+        }
+        kbpgp.box(opts, function(err, result_string, result_buffer) {
+          if (err) {
+            $("#errorModal").modal()
+          }
+          callback(getRidOfKeyBase(result_string));
+        });
+      }, [], 0)
+
+    }
+
+    function decryptMessage(privateKey, message, callback) {
+      privatekeyarray = [privateKey];
+      makeKeyRing(privatekeyarray, function(response) {
+        var ring = new kbpgp.keyring.KeyRing;
+        for (var i in response) {
+          ring.add_key_manager(response[i]);
+        }
+        kbpgp.unbox({
+          keyfetch: ring,
+          armored: message
+        }, function(err, literals) {
+          if (err) {
+            callback(undefined, "err")
+          }
+          callback(literals[0].toString())
+
+        });
+      }, [], 0)
+    }
+
+    function getRidOfKeyBase(string) {
+
+      var res = string.replace("Keybase OpenPGP v2.0.8", "Tratchat OpenPGP v1.0");
+      var result = res.replace("https://keybase.io/crypto", "https://tratchat.com || credit to keybase");
+      return result;
+    }
+
+    function generateKeys(user, callback) {
+
+      var opts = {
+        userid: user
+      };
+
+      kbpgp.KeyManager.generate_ecc(opts, function(err, charlie) {
+        charlie.sign({}, function(err) {
+          charlie.export_pgp_private({}, function(err, pgp_private) {
+            charlie.export_pgp_public({}, function(err, pgp_public) {
+              callback(getRidOfKeyBase(pgp_public), getRidOfKeyBase(pgp_private))
+            });
+          });
+
+
+        });
+      });
+    }
+
+    function hexString(buffer) {
+      const byteArray = new Uint8Array(buffer);
+
+      const hexCodes = [...byteArray].map(value => {
+        const hexCode = value.toString(16);
+        const paddedHexCode = hexCode.padStart(2, '0');
+        return paddedHexCode;
+      });
+
+      return hexCodes.join('');
+    }
+
+
+    function digestMessage(message) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(message);
+      return window.crypto.subtle.digest('SHA-256', data);
+    }
+
+
+    function doChats(firstTime) {
+      return new Promise(function(resolve, reject) {
+        data = {
+          token: getData("token")
+        }
+        encryptedBridgeRequest({
+          path: "getChats",
+          data: data,
+          privateKey: getData("privateKey"),
+          publicKey: getData("publicKey"),
+          bridge: getData("bridge")
+        }, function(response, err) {
+          if (err) {
+            $("#errorModal").modal()
+          } else {
+            //do things
+
+            data1 = JSON.parse(response);
+            $('#chatsPageChats').empty();
+            if (data1.length == 0) {
+              $('#chatsPageChats').append('<h5 align="center">You have no chats</h5><h5 align="center">Click the plus to start one!</h5>')
+              digestMessage(response).then(digestValue => {
+                var currentChatsHash = hexString(digestValue);
+                if (currentChatsHash != getData("chatsHash")) {
+                  digestMessage(response).then(digestValue => {
+                    var chatsHash = hexString(digestValue);
+                    setData("chatsHash", chatsHash)
+                    if (!firstTime) {
+                      redoChat(getData("chatID"))
+                    }
+                  });
+                }
+
+              });
+              resolve("none")
+            } else {
+              data1.sort(function(a, b) {
+                return parseFloat(b.lastSent) - parseFloat(a.lastSent);
+              });
+              for (var i = 0; i < data1.length; i++) {
+                var obj = data1[i];
+                if (obj.friends.length == 2) {
+                  if (obj.friends[0].username.toLowerCase() == getData("yourUsername").toLowerCase()) {
+                    var groupname = obj.friends[1].name;
+                    var groupusername = "@" + obj.friends[1].username;
+                    var color = obj.friends[1].color;
+                    var icon = "far fa-" + obj.friends[1].icon;
+
+                  } else {
+                    var groupname = obj.friends[0].name;
+                    var groupusername = "@" + obj.friends[0].username;
+                    var color = obj.friends[0].color;
+                    var icon = "far fa-" + obj.friends[0].icon;
+                  }
+                } else if (obj.friends.length > 2) {
+                  var usernameList = ""
+                  for (var x = 0; x < obj['friends'].length; x++) {
+                    if (obj['friends'][x].username.toLowerCase() != getData("yourUsername").toLowerCase()) {
+                      if (usernameList.includes("@")) {
+                        usernameList += ", @" + obj['friends'][x].username
+
+                      } else {
+                        usernameList += "@" + obj['friends'][x].username
+                      }
+                    }
+
+                  }
+                  var groupname = "Group Chat";
+                  var groupusername = usernameList
+                  var color = obj.friends[0].color;
+                  var icon = "fas fa-users";
+                }
+                $('#chatsPageChats').append('<li chat-id="' + preventHTMLinject(obj.chatID) +
+                  '" data-lastSent="' + preventHTMLinject(obj.lastSent) +
+                  '" class="list-group-item chat chatlisthing" style="/*background-color: transparent;*/border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;border-left-color: transparent;border-right-color: transparent;"> <div class="row d-flex justify-content-center align-items-center" style="height: 100%;"> <div class="col-3" style="height: 100%;"><i class="' +
+                  preventHTMLinject(icon) + '"  style="font-size:4vw;color:' + preventHTMLinject(color) + '"></i></div> <div class="col"><h6 style="font-size: 1.5vw;">' + preventHTMLinject(groupname) + '</h6> <h6 style="font-size: 1vw;">' + preventHTMLinject(groupusername) + '</h6></div></div></li>');
+
+              }
+
+
+              $('.chatlisthing').click(function() {
+                console.log("S")
+                setData("chatID", $(this).attr("chat-id"))
+                doChat($(this).attr("chat-id"));
+
+              });
+
+              digestMessage(response).then(digestValue => {
+                var currentChatsHash = hexString(digestValue);
+                if (currentChatsHash != getData("chatsHash")) {
+                  digestMessage(response).then(digestValue => {
+                    var chatsHash = hexString(digestValue);
+                    setData("chatsHash", chatsHash)
+                    if (!firstTime) {
+
+                      redoChat(getData("chatID"))
+                    }
+                  });
+                }
+
+              });
+
+
+              resolve(data1[0].chatID)
+            }
+
+          }
+        })
+      });
+    }
+    currentChatKeys = []
+
+    function setCurrentChatKey(key) {
+      currentChatKeys.push(key)
+    }
+
+    function resetKeys() {
+      currentChatKeys = []
+    }
+
+    function getCurrentChatKeys() {
+      return currentChatKeys;
+    }
+
+    alreadyPrinted = []
+
+    function getAlreadyPrinted() {
+      return alreadyPrinted;
+    }
+
+    function addAlreadyPrinted(id) {
+      alreadyPrinted.push(id);
+    }
+
+    function clearAlreadyPrinted() {
+      alreadyPrinted = []
+    }
+
+    function existsAlreadyPrinted(id) {
+      return alreadyPrinted.includes(id)
+    }
+
+    function printChat(array, index, redo, chatID, resolve, arrayOfPrinted) {
+      if (getData('chatID') != chatID) {
+        return;
+      }
+      var obj = array[index]
+      if (index < array.length) {
+        if (typeof obj == 'undefined') {
+          confirm("erroer")
+        } else {
+          arrayOfPrinted.push(obj.id)
+          if (!existsAlreadyPrinted(obj.id)) {
+            addAlreadyPrinted(obj.id)
+            decryptMessage(getData("userPrivate"), obj.message, function(decryptedText, err) {
+              if(err){
+                printChat(array, index + 1, redo, chatID, resolve, arrayOfPrinted)
+
+              }else{
+                if (obj.sender == "you") {
+                  if (redo != true) {
+                    $("#chatPageChatList").append('<ul chat-id= "' + preventHTMLinject(obj.id) + '" class="list-group float-right chatitem" style="width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><span>' + preventHTMLinject(decryptedText) + '</span></li></ul>')
+                  }
+                } else {
+                  $("#chatPageChatList").append('<ul chat-id= "' + preventHTMLinject(obj.id) +
+                    '" class="list-group chatitem" style="padding-top:5px; width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><p style="margin-bottom: 0px;margin-top: -4px;color: ' + preventHTMLinject(obj.color) + ';">' + preventHTMLinject(obj.sender) +
+                    '</p><span>' +
+                    preventHTMLinject(decryptedText) + '</span></li></ul>')
+                }
+                var d = $('#chatPageChatList');
+                d.scrollTop(d.prop("scrollHeight"));
+                printChat(array, index + 1, redo, chatID, resolve, arrayOfPrinted)
+              }
+
+            })
+          } else {
+            printChat(array, index + 1, redo, chatID, resolve, arrayOfPrinted)
+          }
+        }
+
+      } else {
+        var needToDeleteArray = $.grep(getAlreadyPrinted(), function(el){return $.inArray(el, arrayOfPrinted) == -1});
+      //  console.log(needToDeleteArray)
+        for(var x = 0; x < needToDeleteArray.length; x++){
+          $('.chatitem[chat-id="' + needToDeleteArray[x] + '"]').remove();
+        }
+        $(".chatitem").dblclick(function() {
+          var random = generateToken()
+          var messageID = $(this).attr('chat-id')
+          if(!$(this).children('li').children('div').length){
+            $(this).children('li').append('<div id="'+preventHTMLinject(random)+'" class="text-right"><button onclick="$(\'#'+preventHTMLinject(random)+'\').remove()" class="btn btn-outline-primary btn-sm" type="button" style="border-color: transparent;color: #f4476b;background-color: white;">cancel</button><button onclick="deleteMessage(\''+preventHTMLinject(messageID)+'\')" class="btn btn-danger btn-sm" type="button" style="border-color: #f4476b;color: #f4476b;background-color: white;">delete message</button></div>');
+          }
+        });
+        resolve("s")
+      }
+
+    }
+    function deleteMessage(id){
+      $('.chatitem[chat-id="' + id + '"]').remove();
+
+      var currentChatID = getData("chatID");
+          // yes
+          var chatID = getData("chatID")
+          data = {
+            token: getData("token"),
+            chatID: currentChatID,
+            messageID: id
+          }
+        //  startLoading("deleting message...")
+          encryptedBridgeRequest({
+            path: "deleteMessage",
+            data: data,
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal()
+            } else {
+              //do things
+              if (response != "done") {
+                $("#errorModal").modal()
+
+          //      stopLoading()
+              //  $('.chatitem[chat-id="' + id + '"]').remove();
+              }
+            }
+          })
+    }
+    function doChat(id) {
+      return new Promise(function(resolve, reject) {
+
+        setData("chatID", id)
+
+        $("#chatPageChatList").empty()
+        $("#chatPageChatList").append('<div style="width:100%" class="text-center d-flex justify-content-center align-items-center"><span class="spinner-border" role="status" style="margin-top:2vh;width: 3vw;height: 3vw;"></span></div>')
+        $("#chatname").text("")
+        $("#chatusername").text("")
+
+        data = {
+          token: getData("token"),
+          chatID: id
+        }
+        encryptedBridgeRequest({
+          path: "getChat",
+          data: data,
+          privateKey: getData("privateKey"),
+          publicKey: getData("publicKey"),
+          bridge: getData("bridge")
+        }, function(response, err) {
+          if (err) {
+            $("#errorModal").modal()
+          } else {
+            //do things
+            resetKeys()
+            data1 = JSON.parse(response);
+            console.log(data1)
+            for (var i = 0; i < data1['publicKeys'].length; i++) {
+              setCurrentChatKey(data1['publicKeys'][i])
+            }
+            if (data1['names'].length == 2) {
+              for (var i = 0; i < data1['names'].length; i++) {
+                if (data1['names'][i].username != getData("yourUsername")) {
+                  $("#chatname").html(data1['names'][i].name + '<i onclick="$(\'#chatoptionsmodal\').modal()" class="fa fa-bars float-right"></i>')
+                  $("#chatusername").html("@" + data1['names'][i].username + '<i style="color:transparent;" class="fa fa-bars float-right"></i>')
+                }
+              }
+            } else {
+              var usernameList = ""
+              for (var i = 0; i < data1['names'].length; i++) {
+                if (data1['names'][i].username.toLowerCase() != getData("yourUsername").toLowerCase()) {
+                  if (usernameList.includes("@")) {
+                    usernameList += ", @" + data1['names'][i].username
+
+                  } else {
+                    usernameList += "@" + data1['names'][i].username
+                  }
+                }
+
+              }
+
+              $("#chatname").html("Group Chat" + '<i onclick="$(\'#chatoptionsmodal\').modal()" class="fa fa-bars float-right"></i>')
+              $("#chatusername").html(usernameList + '<i style="color:transparent;" class="fa fa-bars float-right"></i>')
+
+            }
+            data = data1['chats']
+            clearAlreadyPrinted()
+            $("#chatPageChatList").empty()
+            printChat(data, 0, false, id, function() {
+              resolve("s")
+            }, [])
+          }
+        });
+      })
+    }
+
+    $('#sendChatInput').keypress(function(e) {
+      var key = e.which;
+      if (key == 13) // the enter key code
+      {
+        sendChat()
+
+        return false;
+      }
+    })
+
+    function sendChat() {
+      var message = $("#sendChatInput").val()
+      if (message == "") {
+        return;
+      }
+      $("#sendChatInput").val('')
+      var customChatID = generateToken()
+      $("#chatPageChatList").append('<ul chat-id="'+preventHTMLinject(customChatID)+'" class="list-group float-right chatitem" style="width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><span>' + preventHTMLinject(message) +
+        '</span><span id="' + preventHTMLinject(customChatID) + '" class="spinner-border spinner-border-sm text-center float-right" role="status" style="color: rgb(136,136,136); width: 14px;height: 14px; padding-bottom: 4px"></span>&nbsp;</li></ul>')
+      var d = $('#chatPageChatList');
+      d.scrollTop(d.prop("scrollHeight"));
+      var chat = getData("chatID");
+      if (chat != "none") {
+        var keys = getCurrentChatKeys();
+        encryptMessage(keys, message, function(response) {
+          data = {
+            token: getData("token"),
+            chatID: getData("chatID"),
+            message: response,
+            randomChatKey: customChatID
+          }
+          encryptedBridgeRequest({
+            path: "sendChat",
+            data: data,
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal()
+            } else {
+              //do things
+              if (response == "sent") {
+                $("#" + customChatID).remove();
+              } else {
+                $("#errorModal").modal()
+
+
+              }
+            }
+          });
+        })
+      }
+    }
+
+    function redoChat(id) {
+
+      return new Promise(function(resolve, reject) {
+        if (id == "none") {
+          setTimeout(function() {
+            resolve("none")
+          }, 2000);
+        } else {
+
+          data = {
+            token: getData("token"),
+            chatID: id
+          }
+          encryptedBridgeRequest({
+            path: "redoChat",
+            data: data,
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal()
+            } else {
+              //do things
+              if (response == "deletedchat") {
+                $("#chatPageChatList").empty()
+                $("#chatPageChatList").append('<h1 class="text-center">Chat Was Purged</h1>')
+                $("#chatname").text("")
+                $("#chatusername").text("")
+                setData("chatID", "none")
+                return;
+              }
+              if (response != "error") {
+                data1 = JSON.parse(response);
+                data = data1['chats']
+                printChat(data, 0, true, id, function() {
+                  resolve("s")
+                }, [])
+                $(".loadingChat").remove()
+              } else {
+                resolve("error")
+
+              }
+            }
+          });
+        }
+
+      })
+
+    }
+
+
+    async function updateChats() {
+      if (getData("currentPage") == "chatsPage") {
+        doChats().then(function(response) {
+          updateChats()
+        });
+      }
+    }
+    //  $('div[comment_id="value"]').remove();
+    $("#deleteLast10ChatsButton").click(function() {
+      confirm("delete the last 10 messages in this chat? you will not be able to reverse this action.",
+        function() {
+          // yes
+          startLoading("deleting last 10 chats...")
+          data = {
+            token: getData("token"),
+            chatID: getData("chatID")
+          }
+          encryptedBridgeRequest({
+            path: "deletelast10",
+            data: data,
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal()
+            } else {
+              //do things
+
+              if (response == "done") {
+                $('#chatPageChatList > .chatitem').slice(-10).remove();
+                stopLoading()
+              }
+            }
+          })
+
+        },
+        function() {
+          //no
+        }
+      )
+    })
+    $("#deleteallchatsbutton").click(function() {
+      confirm("delete all messages in this chat? you will not be able to reverse this action.",
+        function() {
+          startLoading("deleting all chats...")
+          data = {
+            token: getData("token"),
+            chatID: getData("chatID")
+          }
+          encryptedBridgeRequest({
+            path: "deleteall",
+            data: data,
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal()
+            } else {
+              //do things
+              if (response == "done") {
+                $('#chatPageChatList').empty()
+                stopLoading()
+              }
+            }
+          })
+
+        },
+        function() {
+          //no
+        }
+      )
+    })
+
+    function leaveChat() {
+      var currentChatID = getData("chatID");
+      confirm("leave this chat? All messages that you sent in this chat will be deleted. You cannot reverse this action.",
+        function() {
+          // yes
+          var chatID = getData("chatID")
+          data = {
+            token: getData("token"),
+            chatID: chatID
+          }
+          startLoading("leaving chat...")
+          encryptedBridgeRequest({
+            path: "leaveChat",
+            data: data,
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal()
+            } else {
+              //do things
+              if (response == "done") {
+                stopLoading()
+                $('li[chat-id="' + chatID + '"]').remove();
+                setData("chatID", "none")
+                $("#chatPageChatList").empty()
+                $("#chatPageChatList").append('<h1 class="text-center">You Left Chat.</h1>')
+                $("#chatname").text("")
+                $("#chatusername").text("")
+              }
+            }
+          })
+        }
+      )
+    }
+    $("#purgechatbutton").click(function() {
+      confirm("purge this chat? all messages, users, and all record of the chat will be deleted. you will not be able to reverse this action.",
+        function() {
+          // yes
+          var chatID = getData("chatID")
+          data = {
+            token: getData("token"),
+            chatID: chatID
+          }
+          startLoading("purging chat...")
+          encryptedBridgeRequest({
+            path: "purgechat",
+            data: data,
+            privateKey: getData("privateKey"),
+            publicKey: getData("publicKey"),
+            bridge: getData("bridge")
+          }, function(response, err) {
+            if (err) {
+              $("#errorModal").modal()
+            } else {
+              //do things
+              if (response == "done") {
+                stopLoading()
+                //  $('li[chat-id="' + chatID + '"]').remove();
+                //redoChat(chatID)
+              }
+            }
+          })
+
+        },
+        function() {
+          //no
+        }
+      )
+    })
+    $('#startChatInput').keypress(function(e) {
+      var key = e.which;
+      if (key == 13) // the enter key code
+      {
+        startChatSearch()
+
+        return false;
+      }
+    });
+
+    function startChatSearch() {
+      startLoading("searching users...")
+      $("#startChatYouself").hide();
+      $("#startChatNotFOund").hide();
+      $("#startChatResults").hide();
+
+      data = {
+        username: $("#startChatInput").val(),
+        token: getData("token")
+      }
+      encryptedBridgeRequest({
+        path: "startChatSearch",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        stopLoading()
+        $("#startAChatModal").modal()
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response == "Not Found") {
+            $("#startChatNotFOund").show()
+          } else {
+            data = JSON.parse(response)
+            if (data.username == getData("yourUsername")) {
+              $("#startChatYouself").show()
+            } else {
+              $("#startChatResultsName").text(preventHTMLinject(data.name))
+              $("#startChatResultsUsername").text("@" + preventHTMLinject(data.username))
+              $("#startChatResultsIcon").removeClass();
+              $("#startChatResultsIcon").addClass(preventHTMLinject("far"))
+              $("#startChatResultsIcon").addClass("fa-" + preventHTMLinject(data.icon))
+              $("#startChatResultsIcon").css("color", preventHTMLinject(data.color))
+              $("#startChatResults").show();
+            }
+
+
+          }
+        }
+      });
+    }
+    $("#startChatButton").click(function() {
+      startLoading("starting chat...")
+      username = $("#startChatResultsUsername").text().substr(1)
+      data = {
+        username: username,
+        token: getData("token")
+      }
+      encryptedBridgeRequest({
+        path: "startChat",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        stopLoading()
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response.length == 100) {
+            doChat(response)
+          } else {
+            throw "s"
+          }
+        }
+      });
+    });
+    $('#accountNewNameInput').keypress(function(e) {
+      var key = e.which;
+      if (key == 13) // the enter key code
+      {
+        changeName();
+      }
+    });
+
+    function changeName() {
+      startLoading("changing you name...")
+      data = {
+        token: getData("token"),
+        name: $('#accountNewNameInput').val()
+      }
+      encryptedBridgeRequest({
+        path: "newName",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        stopLoading()
+
+        if (err) {
+          console.log(err)
+        } else {
+          if (response == $('#accountNewNameInput').val()) {
+            $("#accountName").text(preventHTMLinject(response))
+            $('#accountNewNameInput').val("")
+          }
+        }
+      })
+    }
+    $('#accountNewUsernameInput').keypress(function(e) {
+      var key = e.which;
+      if (key == 13) // the enter key code
+      {
+        changeUsername();
+      }
+    });
+
+    function changeUsername() {
+      data = {
+        token: getData("token"),
+        username: $('#accountNewUsernameInput').val()
+      }
+      startLoading("changing your username...")
+      console.log($('#accountNewUsernameInput').val())
+      encryptedBridgeRequest({
+        path: "newUsername",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        stopLoading()
+
+        if (err) {
+          console.log(err)
+        } else {
+          if (response == $('#accountNewUsernameInput').val()) {
+            $("#accountUsername").text("@" + preventHTMLinject(response))
+            setData("yourUsername", preventHTMLinject(response))
+            $('#accountNewUsernameInput').val("")
+
+          } else if (response == "taken") {
+            $("#usernametakenmodal").modal()
+            $('#accountNewUsernameInput').val("")
+
+          } else {
+
+          }
+        }
+      })
+
+    }
+
+    function doPing() {
+      $("#currentPing").html('<span class="spinner-border spinner-border-sm text-center" role="status" style="color: rgb(136,136,136); width: 14px;height: 14px; padding-bottom: 4px"></span>&nbsp;ms');
+
+      var startTime = performance.now();
+      encryptedBridgeRequest({
+        path: "testBridge",
+        data: {
+          sickbro: "sikl"
+        },
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          console.log(err)
+        } else {
+          var endTime = performance.now();
+          console.log((endTime - startTime))
+          $("#currentPing").text("" + Math.floor((endTime - startTime)) + "ms");
+        }
+      })
+    }
+
+    function doData() {
+
+      encryptedBridgeRequest({
+        path: "getUserData",
+        data: {
+          token: getData("token")
+        },
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          console.log(err)
+        } else {
+          data = JSON.parse(response)
+          $("#dataEncryptedMessages").html("<strong>" + data.numMessages + "</strong>");
+          $("#dataChats").html("<strong>" + data.numChats + "</strong>");
+          doPing()
+        }
+      })
+
+    }
+    $("#purgeChatsButton").click(function() {
+      confirm("Delete <strong>ALL </strong> chats and messages you have sent or received on that tratchat platform. This will delete chats on other users devices as well.", function() {
+        startLoading("purging your chat history...")
+        encryptedBridgeRequest({
+          path: "purgeAllChats",
+          data: {
+            token: getData("token")
+          },
+          privateKey: getData("privateKey"),
+          publicKey: getData("publicKey"),
+          bridge: getData("bridge")
+        }, function(response, err) {
+          stopLoading()
+          if (err) {
+            console.log(err)
+          } else {
+            if (response == "done") {
+              $('#chatsPageChats').empty();
+              go('chatsPage')
+              setData("chatID", "none")
+              $("#chatPageChatList").empty()
+              $("#chatPageChatList").append('<h1 class="text-center">Chat Was Purged</h1>')
+              $("#chatname").text("")
+              $("#chatusername").text("")
+
+            }
+          }
+        })
+      })
+    })
+
+    function purgeAccount() {
+      confirm("Delete <strong>ALL </strong>data associated with your account immediatly, erasing all evidence you ever existed on the tratchat platform. You cannot undo this action.", function() {
+        startLoading('purging your account...')
+        encryptedBridgeRequest({
+          path: "purgeAccount",
+          data: {
+            token: getData("token")
+          },
+          privateKey: getData("privateKey"),
+          publicKey: getData("publicKey"),
+          bridge: getData("bridge")
+        }, function(response, err) {
+          stopLoading()
+          if (err) {
+            console.log(err)
+          } else {
+            if (response == "done") {
+              location.reload();
+            }
+          }
+        })
+      })
+    }
+    $('#addChatInput').keypress(function(e) {
+      var key = e.which;
+      if (key == 13) // the enter key code
+      {
+        addChatSearch()
+
+        return false;
+      }
+    });
+
+    function addChatSearch() {
+      startLoading("searching users...")
+      $("#addChatYouself").hide();
+      $("#addChatNotFOund").hide();
+      $("#addChatResults").hide();
+
+      data = {
+        username: $("#addChatInput").val(),
+        token: getData("token")
+      }
+      encryptedBridgeRequest({
+        path: "startChatSearch",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        stopLoading()
+        $("#addToChatModal").modal()
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response == "Not Found") {
+            $("#addChatNotFOund").show()
+          } else {
+            data = JSON.parse(response)
+            if (data.username == getData("yourUsername")) {
+              $("#addChatYouself").show()
+            } else {
+              $("#addChatResultsName").text(preventHTMLinject(data.name))
+              $("#addChatResultsUsername").text("@" + preventHTMLinject(data.username))
+              $("#addChatResultsIcon").removeClass();
+              $("#addChatResultsIcon").addClass("far")
+              $("#addChatResultsIcon").addClass("fa-" + preventHTMLinject(data.icon))
+              $("#addChatResultsIcon").css("color", preventHTMLinject(data.color))
+              $("#addChatResults").show();
+            }
+
+          }
+        }
+      });
+    }
+    $("#addChatButton").click(function() {
+      startLoading("adding to  chat...")
+      username = $("#addChatResultsUsername").text().substr(1)
+      data = {
+        username: username,
+        token: getData("token"),
+        chatID: getData("chatID")
+      }
+      encryptedBridgeRequest({
+        path: "addUserToChat",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        stopLoading()
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response.length == 4) {
+            console.log("added")
+            doChat(getData("chatID"))
+          } else {
+            throw "s"
+          }
+        }
+      });
+    });
+
+    function preventHTMLinject(html){
+      return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+  </script>
+</body>
+
+</html>
