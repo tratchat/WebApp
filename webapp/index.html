@@ -119,7 +119,6 @@
                     <data name="chatID" data="none">
                       <data name="token" data="none">
                         <data name="chatsHash" data="none">
-                          <data name="sharedSecret" data="none">
 
   </div>
 
@@ -1316,154 +1315,86 @@
       location.href = "https://tratchat.com"
     }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
   <script>
     hideAll()
-
-    requests = []
-
-    function addRequest(callback, id, random) {
-      requests.push({
-        reqID: id,
-        callback: callback,
-        random: random
-      })
-    }
-
-    function getRequest(id) {
-      for (var i = 0; i < requests.length; i++) {
-        if (requests[i].reqID == id) {
-          return requests[i];
-        }
-      }
-      return undefined;
-    }
-
-    function delRequest(id) {
-      for (var i = 0; i < requests.length; i++) {
-        if (requests[i].reqID == id) {
-          requests.splice(i, 1);
-        }
-      }
-    }
-
-    var socket = io("https://165.227.15.238/");
-
-
-    socket.on('response', function(msg) {
-      var sharedSecret = getData("sharedSecret")
-      var encryptedBytes = aesjs.utils.hex.toBytes(msg);
-      var key = new Uint8Array(sharedSecret.split('.'))
-      var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
-      var decryptedBytes = aesCtr.decrypt(encryptedBytes);
-      var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
-
-      var responsedata = JSON.parse(decryptedText)
-
-      var reqID = responsedata.reqID;
-
-      var request = getRequest(reqID);
-
-      if(request.random == responsedata.random){
-        request.callback(responsedata.data)
-      }else{
-        alert('bad bad bad bad modified request')
-      }
-    });
+    go("startScreenPage")
 
     function encryptedBridgeRequest(options, callback) {
 
-      var sharedSecret = getData('sharedSecret')
+      const serverPublic = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+    Version: Tratchat OpenPGP v1.0
+    Comment: https://tratchat.com || credit to keybase
 
+    xm8EXL/GDhMFK4EEACIDAwQXPGDRZitEXembe2qftob3wf7AbHhFaYVWMjIO0I0b
+    1N38QvDwOY01KVWCR+RZIlEVBrScfEurfYp/KAWL0Mq+3iiKD9QlrfyBGYMhnCQ4
+    aJmpZ+1qktTYwOvVJMyeCpTNBnNlcnZlcsKSBBMTCgAaBQJcv8YOAhsBAwsJBwMV
+    CggCHgECF4ACGQEACgkQEg/f56H5sRhOYgF5AY9PxbEUyJbNZfoOJB4mJOAXYvM3
+    U7WdmqVXmynpe6A/Ef+RigAAe6WyaYHzOOrbAYCGa0VOFqfXUYH3JS327G7rxPOF
+    lHlufU2TdEa82N3G5h9SaukSJ7t9o/mkMV/Z2lPOVgRcv8YOEggqhkjOPQMBBwID
+    BGEPUNOi8af4WMjFn72ouhVvaR14RhHfW3cTmcX1sG7yBk9KAT2C9k6EBIwPRFJV
+    KwiU96hDz1fH+WQXpGb8WiwDAQoJwocEGBMKAA8FAly/xg4FCQ8JnAACGwQACgkQ
+    Eg/f56H5sRiXLgGAxK1HnoWLVyTNyej1Hni2KI/ZZd2E+thil1fFDDS8zkGma72l
+    /wvMwKLGaos1nU/WAX0aC4T0hQBdD55314C2LN+Jpo3LNz+hCUcQ6f21de9vdJ2C
+    So3vTh01V5/zOMqiDsvOUgRcv8YOEwgqhkjOPQMBBwIDBDITiY9LEYnrpT1DLjF3
+    Plmpx/r3dcRe1FU3Z+KT9ugvELZ32eDO7zMk+U/E1fJsFjlFBIfcUCLbAlUqjrzl
+    5MHCwCcEGBMKAA8FAly/xg4FCQ8JnAACGyIAagkQEg/f56H5sRhfIAQZEwoABgUC
+    XL/GDgAKCRBFSz47NxWKLDnXAQD/mV5bYeHroX8ZBRCTjjMePJ7izbDkhEVeDYaa
+    SG7jhgD/eQw9zXzOWVtcmIXlxClDLI/Ho29BB+T7DGQD//aRusMkOwF+LqeRGiQT
+    xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
+    3otoouLXS27sHS/szvgYJzR1R7MqyQxQ8odRvQJewHjAENOlJrBeSBRYk6c=
+    =CsAL
+-----END PGP PUBLIC KEY BLOCK-----
+
+`
       var bridge = options.bridge;
       var path = options.path;
-      //var sharedSecret = options.sharedSecret;
+      var privateKey = options.privateKey;
+      var publicKey = options.publicKey;
       var data = options.data;
 
-
-      var reqID = generateToken() + "-" + generateToken()
-      var random = generateToken(10)
-      addRequest(callback, reqID, random)
+      var randomKey = generateToken()
 
       message = JSON.stringify({
         path: path,
-        reqID: reqID,
-        data: data,
-        random: random
+        publicKey: publicKey,
+        randomKey: randomKey,
+        data: data
       })
-      var key = new Uint8Array(sharedSecret.split('.'))
-      var textBytes = aesjs.utils.utf8.toBytes(message);
-      var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
-      var encryptedBytes = aesCtr.encrypt(textBytes);
-      var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+      encryptMessage([serverPublic], message, function(encryptedData) {
+        var compressed = LZString.compressToUTF16(encryptedData).toString()
+        $.ajax({
+          type: 'POST',
+          url: bridge,
+          data: {
+            data: compressed
+          },
+          success: function(encryptedResponse) {
+            var body = LZString.decompressFromUTF16(encryptedResponse)
+            decryptMessage(privateKey, body, function(response) {
+              responseData = JSON.parse(response)
+              if (responseData.randomKey == randomKey) {
+                if (responseData.response == "invalid token.") {
+                  stopLoading();
+                  startLoading("you have been logged out.")
+                  setTimeout(function() {
+                    location.reload();
+                  }, 2000)
+                } else {
 
-      socket.emit('webapp', encryptedHex);
-
-    }
-
-    function generateToken(var1) {
-      if(!var1){
-        var var1 = 100
-      }
-      //edit the token allowed characters
-      var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
-      var b = [];
-      for (var i = 0; i < var1; i++) {
-        var j = (Math.random() * (a.length - 1)).toFixed(0);
-        b[i] = a[j];
-      }
-      return b.join("");
-    }
-
-    function generateSymmetricKey() {
-      //edit the token allowed characters
-      var b = [];
-      for (var i = 0; i < 32; i++) {
-        var j = (Math.random() * 255).toFixed(0);
-        b[i] = j;
-      }
-      return b.join(".");
-    }
-
-
-    socket.on('connect', function() {
-      console.log('connected');
-      const serverPublic = `-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: Tratchat OpenPGP v1.0
-Comment: https://tratchat.com || credit to keybase
-
-xm8EXL/GDhMFK4EEACIDAwQXPGDRZitEXembe2qftob3wf7AbHhFaYVWMjIO0I0b
-1N38QvDwOY01KVWCR+RZIlEVBrScfEurfYp/KAWL0Mq+3iiKD9QlrfyBGYMhnCQ4
-aJmpZ+1qktTYwOvVJMyeCpTNBnNlcnZlcsKSBBMTCgAaBQJcv8YOAhsBAwsJBwMV
-CggCHgECF4ACGQEACgkQEg/f56H5sRhOYgF5AY9PxbEUyJbNZfoOJB4mJOAXYvM3
-U7WdmqVXmynpe6A/Ef+RigAAe6WyaYHzOOrbAYCGa0VOFqfXUYH3JS327G7rxPOF
-lHlufU2TdEa82N3G5h9SaukSJ7t9o/mkMV/Z2lPOVgRcv8YOEggqhkjOPQMBBwID
-BGEPUNOi8af4WMjFn72ouhVvaR14RhHfW3cTmcX1sG7yBk9KAT2C9k6EBIwPRFJV
-KwiU96hDz1fH+WQXpGb8WiwDAQoJwocEGBMKAA8FAly/xg4FCQ8JnAACGwQACgkQ
-Eg/f56H5sRiXLgGAxK1HnoWLVyTNyej1Hni2KI/ZZd2E+thil1fFDDS8zkGma72l
-/wvMwKLGaos1nU/WAX0aC4T0hQBdD55314C2LN+Jpo3LNz+hCUcQ6f21de9vdJ2C
-So3vTh01V5/zOMqiDsvOUgRcv8YOEwgqhkjOPQMBBwIDBDITiY9LEYnrpT1DLjF3
-Plmpx/r3dcRe1FU3Z+KT9ugvELZ32eDO7zMk+U/E1fJsFjlFBIfcUCLbAlUqjrzl
-5MHCwCcEGBMKAA8FAly/xg4FCQ8JnAACGyIAagkQEg/f56H5sRhfIAQZEwoABgUC
-XL/GDgAKCRBFSz47NxWKLDnXAQD/mV5bYeHroX8ZBRCTjjMePJ7izbDkhEVeDYaa
-SG7jhgD/eQw9zXzOWVtcmIXlxClDLI/Ho29BB+T7DGQD//aRusMkOwF+LqeRGiQT
-xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
-3otoouLXS27sHS/szvgYJzR1R7MqyQxQ8odRvQJewHjAENOlJrBeSBRYk6c=
-=CsAL
------END PGP PUBLIC KEY BLOCK-----
-
-`;
-
-      var sharedSecret = generateSymmetricKey();
-      setData("sharedSecret", sharedSecret)
-
-      encryptMessage([serverPublic], sharedSecret, function(encrypted) {
-        socket.emit('login', encrypted);
-        go("startScreenPage")
+                  callback(responseData.response, undefined)
+                }
+              } else {
+                callback(undefined, "Bridge Tried To Edit Data, Request Failed")
+              }
+            })
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            callback(undefined, "Request Error" + thrownError)
+          }
+        })
       })
 
-    });
-
+    }
 
     function confirm(message, yesCallback, noCallback) {
       $('.modal').modal('hide');
@@ -1526,7 +1457,7 @@ xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
       }
       hideAll();
       if (place == "startScreenPage") {
-        setTimeout(function(){doBridgeSetup()}, 1000)
+        doBridgeSetup()
       }
       if (place == "dataPage") {
         doData()
@@ -1711,7 +1642,6 @@ xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
                 r = 8,
                 p = 1;
               var dkLen = 32;
-              stopLoading()
 
               scrypt(password1, salt, N, r, p, dkLen, function(error, progress, key) {
                 if (key != undefined) {
@@ -1719,6 +1649,7 @@ xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
                   decryptedPrivate = decryptAES(response.privateKey, key);
                   setData("userPrivate", decryptedPrivate)
                   go("chatsPage")
+                  stopLoading()
 
                 }
               })
@@ -2350,7 +2281,7 @@ xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
     async function updateChats() {
       if (getData("currentPage") == "chatsPage") {
         doChats().then(function(response) {
-          setTimeout(function(){updateChats()}, 500)
+          updateChats()
         });
       }
     }
