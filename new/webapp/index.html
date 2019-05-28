@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
   <style>
-  /*
+    /*
     @font-face {
       font-family: 'Fredoka One';
       font-style: normal;
@@ -119,9 +119,56 @@
                     <data name="chatID" data="none">
                       <data name="token" data="none">
                         <data name="chatsHash" data="none">
+                          <data name="sharedSecret" data="none">
+
 
   </div>
-
+  <div class="modal fade" role="dialog" tabindex="-1" id="devicemodal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="text-center" style="margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;padding-top: 1.5vh;width: 100vw;height: 7vh;">tratchat</h3><button type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-sm-12 text-center">
+                <h6 id="deviceexpandedname" style="font-size: 3.5vh;">Device Expanded</h6>
+                <h6 id="deviceexpandedmeta" style="font-size: 2vh;">Last Seen :&nbsp;<span style="color: #f4476b;">10 minutes</span>&nbsp; &nbsp;<span style="color: red;"><i class="fa fa-lock"></i>&nbsp;Locked</span></h6>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-sm-12">
+                <hr>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-sm-12" id="displaylock"><button id="devicelockbutton" class="btn btn-outline-primary btn-block" type="button" style="color: red;outline-color: red;box-shadow: none;border-color: red;">Lock Device&nbsp;<i
+                    class="fa fa-lock"></i></button>
+                <h6 class="text-center" style="font-size: 11px;margin-top: 1vh;">Prevent usability and display locked screen</h6>
+                <hr>
+              </div>
+              <div class="col-sm-12" id="displayunlock"><button id="deviceunlocklockbutton" class="btn btn-outline-primary btn-block" type="button" style="color: green;outline-color: green;box-shadow: none;border-color: green;">Unlock Device&nbsp;<i
+                    class="fa fa-unlock"></i></button>
+                <h6 class="text-center" style="font-size: 11px;margin-top: 1vh;">Allow usability and remove locked screen</h6>
+                <hr>
+              </div>
+              <div class="col-sm-12"><button id="purgedevicebutton" class="btn btn-outline-primary btn-block" type="button" style="color: red;outline-color: green;box-shadow: none;border-color: red;">Purge Device&nbsp;<i
+                    class="fa fa-trash-o"></i></button>
+                <h6 class="text-center" style="font-size: 11px;margin-top: 1vh;">purge all data on device and force logout</h6>
+              </div>
+            </div>
+          </div>
+          <div class="container" style="margin-top: 3vh;">
+            <form class="form-inline"><input id="deviceNameInput" class="form-control form-control-sm" type="text" placeholder="Change Device Name" style="width: 75%;"><button id="deviceNameButton" class="btn btn-primary btn-block btn-sm"
+                type="button" style="background-color: #eb3b60;width: 20%;border-color: transparent;margin-left: 5%;"><i class="fa fa-check"></i></button></form>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button></div>
+      </div>
+    </div>
+  </div>
   <main id="chatsPage">
     <div class="row" style="width: 100vw;">
       <div class="col-xl-3" style="padding-left: 0px!important;width: 20vw!important;padding-right: 0px!important;background-color: white;height: 100vh;">
@@ -132,7 +179,7 @@
             <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5><button class="btn btn-outline-primary btn-block" type="button"
               style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('chatsPage')">chats</button>
             <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
-              onclick="go('accountPage')">account</button><button class="btn btn-outline-primary btn-block" type="button"
+              onclick="go('accountPage');doDevicesPage()">account</button><button class="btn btn-outline-primary btn-block" type="button"
               style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('dataPage')">data &amp; privacy</button>
             <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
               onclick="location.href='https://tratchat.com'"> return to home </button>
@@ -455,7 +502,7 @@
             <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5><button class="btn btn-outline-primary btn-block" type="button"
               style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('chatsPage')">chats</button>
             <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
-              onclick="go('accountPage')">account</button><button class="btn btn-outline-primary btn-block" type="button"
+              onclick="go('accountPage');doDevicesPage()">account</button><button class="btn btn-outline-primary btn-block" type="button"
               style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('dataPage')">data &amp; privacy</button>
             <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
               onclick="location.href='https://tratchat.com'"> return to home </button>
@@ -491,6 +538,58 @@
                 type="button" style="width: 15%;margin-left: 5%;border-color: transparent;background-color: #f4476b;"><i class="fa fa-check"></i></button></form>
           </li>
         </ul>
+        <div style="flex: 1 1 auto;">
+          <h5 class="text-center" style="font-family: 'Fredoka One', cursive;margin-top:1vh">Your Devices</h5>
+          <div id="yourDevicesList" style="overflow-y: auto;max-height: 35vh;">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+                  <div class="col">
+                    <h6 style="font-size: 1.5vw;color: #f4476b;"><strong>This Device</strong></h6>
+                    <h6 class="text-left" style="font-size: 1.2vw;margin-top: 1vh;">Current Name: &nbsp;&nbsp;<span style="color: #f4476b;">My Device name</span></h6>
+                  </div>
+                  <div class="col-1"><i class="fa fa-edit float-right" style="font-size: 21px;color: #6f7a85;"></i></div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+                  <div class="col">
+                    <h6 style="font-size: 1.5vw;">Device Name</h6>
+                    <h6 style="font-size: 1.2vw;">Last Seen :&nbsp;<span style="color: #f4476b;">10 minutes</span>&nbsp; &nbsp;<span style="color: #60dd49;"><i class="fa fa-unlock"></i>&nbsp;Unlocked</span></h6>
+                  </div>
+                  <div class="col-1"><i class="fa fa-edit float-right" style="font-size: 21px;color: #6f7a85;"></i></div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+                  <div class="col">
+                    <h6 style="font-size: 1.5vw;">Device Name</h6>
+                    <h6 style="font-size: 1.2vw;">Last Seen :&nbsp;<span style="color: #f4476b;">10 minutes</span>&nbsp; &nbsp;<span style="color: #60dd49;"><i class="fa fa-unlock"></i>&nbsp;Unlocked</span></h6>
+                  </div>
+                  <div class="col-1"><i class="fa fa-edit float-right" style="font-size: 21px;color: #6f7a85;"></i></div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+                  <div class="col">
+                    <h6 style="font-size: 1.5vw;">Device Name</h6>
+                    <h6 style="font-size: 1.2vw;">Last Seen :&nbsp;<span style="color: #f4476b;">10 minutes</span>&nbsp; &nbsp;<span style="color: #60dd49;"><i class="fa fa-unlock"></i>&nbsp;Unlocked</span></h6>
+                  </div>
+                  <div class="col-1"><i class="fa fa-edit float-right" style="font-size: 21px;color: #6f7a85;"></i></div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
+                  <div class="col">
+                    <h6 style="font-size: 1.5vw;">Device Name</h6>
+                    <h6 style="font-size: 1.2vw;">Last Seen :&nbsp;<span style="color: #f4476b;">10 minutes</span>&nbsp; &nbsp;<span style="color: #60dd49;"><i class="fa fa-unlock"></i>&nbsp;Unlocked</span></h6>
+                  </div>
+                  <div class="col-1"><i class="fa fa-edit float-right" style="font-size: 21px;color: #6f7a85;"></i></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="col" style="background-color: white;">
         <ul class="list-group">
@@ -550,7 +649,7 @@
             <h5 class="text-center" style="color: #6f7a85;font-family: 'Fredoka One', cursive;margin-bottom: 3vh;">web app beta</h5><button class="btn btn-outline-primary btn-block" type="button"
               style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('chatsPage')">chats</button>
             <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
-              onclick="go('accountPage')">account</button><button class="btn btn-outline-primary btn-block" type="button"
+              onclick="go('accountPage');doDevicesPage()">account</button><button class="btn btn-outline-primary btn-block" type="button"
               style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;" onclick="go('dataPage')">data &amp; privacy</button>
             <button class="btn btn-outline-primary btn-block" type="button" style="color: #f4476b;outline-color: #f4476b!important;box-shadow: none;border-color: #f4476b!important;margin-right: 10%;margin-left: 10%;width: 80%;"
               onclick="location.href='https://tratchat.com'"> return to home </button>
@@ -758,6 +857,55 @@
       </div>
     </div>
   </div>
+  <main id="lockedPage" class="login-clean" style="height: 100vh;width: 100vw;">
+    <h1 class="text-center" style="/*height: 10vh;*/margin-bottom: 0px;font-family: 'Fredoka One', cursive;color: #f4476b;">tratchat</h1>
+    <hr style="font-size: 22px;background-color: #ffffff;margin-right: 10vw;margin-left: 10vw;">
+    <form method="post" style="border-radius: 25px;margin-top: 20vh;">
+      <div class="text-center"><i class="fa fa-lock" style="font-size: 113px;"></i></div>
+      <h3 class="text-center" style="color: #f4476b;font-family: 'Fredoka One', cursive;">Device Locked</h3>
+      <h6 class="text-center">logging out. &nbsp;</h6>
+      <div class="d-lg-flex justify-content-lg-center"><span class="spinner-border" role="status"></span></div>
+    </form>
+  </main>
+  <div class="modal fade" role="dialog" tabindex="-1" id="tormodal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-xl-flex">
+          <h4 class="modal-title" style="color: #f4476b;font-family: 'Fredoka One', cursive;">tratchat</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <h3 class="text-center" style="font-family: 'Fredoka One', cursive;color: #505e6c;">Looks like you are on tor!</h3>
+          <h5 class="text-center" style="font-family: 'Fredoka One', cursive;color: #505e6c;">visit our .onion url at&nbsp;</h5>
+          <h5 class="text-center"><a href="http://tratchat2rbtbe5t.onion/webapp/"><span style="text-decoration: underline;">http://tratchat2rbtbe5t.onion/webapp/</span></a></h5>
+          <p style="font-family: 'Fredoka One', cursive;color: #505e6c;">Connecting to our .onion is&nbsp;</p>
+          <ul style="font-family: 'Fredoka One', cursive;color: #505e6c;">
+            <li>More secure (the connection never leaves tor)</li>
+            <li>Faster (there is no need for tor exit nodes)</li>
+          </ul>
+        </div>
+        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.trat.chat/jquery.min.js"></script>
+  <script>
+    if (window.location.host != "tratchat2rbtbe5t.onion") {
+      $.ajax({
+        type: 'GET',
+        url: 'http://tratchat2rbtbe5t.onion/check',
+        data: {},
+        success: function(data) {
+          console.log("tor")
+          $('#tormodal').modal();
+        },
+        error: function(xhr, status, error) {
+          console.log("not tor")
+
+        }
+      });
+    }
+  </script>
   <script src="https://cdn.trat.chat/kbpgp-2.0.8-min.js"></script>
 
   <script>
@@ -1293,11 +1441,12 @@
         });
     }
   </script>
-  <script src="https://cdn.trat.chat/jquery.min.js"></script>
+
   <script src="https://cdn.trat.chat/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdn.trat.chat/aes.js"></script>
   <script src="https://cdn.trat.chat/scrypt.js" type="text/javascript"></script>
   <script src="https://cdn.trat.chat/buffer.js" type="text/javascript"></script>
+  <script src="https://cdn.trat.chat/socketio.js" type="text/javascript"></script>
   <script>
     window.mobilecheck = function() {
       var check = false;
@@ -1319,82 +1468,177 @@
     hideAll()
     go("startScreenPage")
 
+    requests = []
+
+    function addRequest(callback, id, random) {
+      requests.push({
+        reqID: id,
+        callback: callback,
+        random: random
+      })
+    }
+
+    function getRequest(id) {
+      for (var i = 0; i < requests.length; i++) {
+        if (requests[i].reqID == id) {
+          return requests[i];
+        }
+      }
+      return undefined;
+    }
+
+    function delRequest(id) {
+      for (var i = 0; i < requests.length; i++) {
+        if (requests[i].reqID == id) {
+          requests.splice(i, 1);
+        }
+      }
+    }
+
+    var socket = io("https://165.227.15.238/");
+
+
+    socket.on('response', function(msg) {
+      var sharedSecret = getData("sharedSecret")
+      var encryptedBytes = aesjs.utils.hex.toBytes(msg);
+      var key = new Uint8Array(sharedSecret.split('.'))
+      var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+      var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+      var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+
+      var responsedata = JSON.parse(decryptedText)
+      if (responsedata.data == "invalid token.") {
+        go('lockedPage')
+        setTimeout(function() {
+          location.reload();
+        }, 2000)
+      } else if (responsedata.data == "token locked.") {
+        go('lockedPage')
+        setTimeout(function() {
+          location.reload();
+        }, 2000)
+      } else {
+
+        var reqID = responsedata.reqID;
+
+        var request = getRequest(reqID);
+
+        if (request.random == responsedata.random) {
+          request.callback(responsedata.data)
+        } else {
+          alert('bad bad bad bad modified request')
+        }
+      }
+
+
+    });
+
     function encryptedBridgeRequest(options, callback) {
 
-      const serverPublic = `-----BEGIN PGP PUBLIC KEY BLOCK-----
-    Version: Tratchat OpenPGP v1.0
-    Comment: https://tratchat.com || credit to keybase
+      var sharedSecret = getData('sharedSecret')
 
-    xm8EXL/GDhMFK4EEACIDAwQXPGDRZitEXembe2qftob3wf7AbHhFaYVWMjIO0I0b
-    1N38QvDwOY01KVWCR+RZIlEVBrScfEurfYp/KAWL0Mq+3iiKD9QlrfyBGYMhnCQ4
-    aJmpZ+1qktTYwOvVJMyeCpTNBnNlcnZlcsKSBBMTCgAaBQJcv8YOAhsBAwsJBwMV
-    CggCHgECF4ACGQEACgkQEg/f56H5sRhOYgF5AY9PxbEUyJbNZfoOJB4mJOAXYvM3
-    U7WdmqVXmynpe6A/Ef+RigAAe6WyaYHzOOrbAYCGa0VOFqfXUYH3JS327G7rxPOF
-    lHlufU2TdEa82N3G5h9SaukSJ7t9o/mkMV/Z2lPOVgRcv8YOEggqhkjOPQMBBwID
-    BGEPUNOi8af4WMjFn72ouhVvaR14RhHfW3cTmcX1sG7yBk9KAT2C9k6EBIwPRFJV
-    KwiU96hDz1fH+WQXpGb8WiwDAQoJwocEGBMKAA8FAly/xg4FCQ8JnAACGwQACgkQ
-    Eg/f56H5sRiXLgGAxK1HnoWLVyTNyej1Hni2KI/ZZd2E+thil1fFDDS8zkGma72l
-    /wvMwKLGaos1nU/WAX0aC4T0hQBdD55314C2LN+Jpo3LNz+hCUcQ6f21de9vdJ2C
-    So3vTh01V5/zOMqiDsvOUgRcv8YOEwgqhkjOPQMBBwIDBDITiY9LEYnrpT1DLjF3
-    Plmpx/r3dcRe1FU3Z+KT9ugvELZ32eDO7zMk+U/E1fJsFjlFBIfcUCLbAlUqjrzl
-    5MHCwCcEGBMKAA8FAly/xg4FCQ8JnAACGyIAagkQEg/f56H5sRhfIAQZEwoABgUC
-    XL/GDgAKCRBFSz47NxWKLDnXAQD/mV5bYeHroX8ZBRCTjjMePJ7izbDkhEVeDYaa
-    SG7jhgD/eQw9zXzOWVtcmIXlxClDLI/Ho29BB+T7DGQD//aRusMkOwF+LqeRGiQT
-    xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
-    3otoouLXS27sHS/szvgYJzR1R7MqyQxQ8odRvQJewHjAENOlJrBeSBRYk6c=
-    =CsAL
------END PGP PUBLIC KEY BLOCK-----
-
-`
       var bridge = options.bridge;
       var path = options.path;
-      var privateKey = options.privateKey;
-      var publicKey = options.publicKey;
+      //var sharedSecret = options.sharedSecret;
       var data = options.data;
 
-      var randomKey = generateToken()
+
+      var reqID = generateToken() + "-" + generateToken()
+      var random = generateToken(10)
+      addRequest(callback, reqID, random)
 
       message = JSON.stringify({
         path: path,
-        publicKey: publicKey,
-        randomKey: randomKey,
-        data: data
+        reqID: reqID,
+        data: data,
+        random: random
       })
-      encryptMessage([serverPublic], message, function(encryptedData) {
-        var compressed = LZString.compressToUTF16(encryptedData).toString()
-        $.ajax({
-          type: 'POST',
-          url: bridge,
-          data: {
-            data: compressed
-          },
-          success: function(encryptedResponse) {
-            var body = LZString.decompressFromUTF16(encryptedResponse)
-            decryptMessage(privateKey, body, function(response) {
-              responseData = JSON.parse(response)
-              if (responseData.randomKey == randomKey) {
-                if (responseData.response == "invalid token.") {
-                  stopLoading();
-                  startLoading("you have been logged out.")
-                  setTimeout(function() {
-                    location.reload();
-                  }, 2000)
-                } else {
+      var key = new Uint8Array(sharedSecret.split('.'))
+      var textBytes = aesjs.utils.utf8.toBytes(message);
+      var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+      var encryptedBytes = aesCtr.encrypt(textBytes);
+      var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
 
-                  callback(responseData.response, undefined)
-                }
-              } else {
-                callback(undefined, "Bridge Tried To Edit Data, Request Failed")
-              }
-            })
-          },
-          error: function(xhr, ajaxOptions, thrownError) {
-            callback(undefined, "Request Error" + thrownError)
-          }
-        })
-      })
+      socket.emit('webapp', encryptedHex);
 
     }
+
+    function generateToken(var1) {
+      if (!var1) {
+        var var1 = 100
+      }
+      //edit the token allowed characters
+      var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+      var b = [];
+      for (var i = 0; i < var1; i++) {
+        var j = (Math.random() * (a.length - 1)).toFixed(0);
+        b[i] = a[j];
+      }
+      return b.join("");
+    }
+
+    function generateSymmetricKey() {
+      //edit the token allowed characters
+      var b = [];
+      for (var i = 0; i < 32; i++) {
+        var j = (Math.random() * 255).toFixed(0);
+        b[i] = j;
+      }
+      return b.join(".");
+    }
+
+    socket.on('update', function(data1) {
+      var data = JSON.parse(data1)
+      if(data.chatID == getData("chatID")){
+        redoChat(getData("chatID")).then(function(){
+          doChats()
+        })
+      }else{
+        doChats()
+      }
+    });
+    socket.on('loggedIN', function(){
+      if(getData("currentPage") == "startScreenPage"){
+        doBridgeSetup()
+      }
+    })
+    socket.on('connect', function() {
+      console.log('connected');
+      const serverPublic = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: Tratchat OpenPGP v1.0
+Comment: https://tratchat.com || credit to keybase
+
+xm8EXL/GDhMFK4EEACIDAwQXPGDRZitEXembe2qftob3wf7AbHhFaYVWMjIO0I0b
+1N38QvDwOY01KVWCR+RZIlEVBrScfEurfYp/KAWL0Mq+3iiKD9QlrfyBGYMhnCQ4
+aJmpZ+1qktTYwOvVJMyeCpTNBnNlcnZlcsKSBBMTCgAaBQJcv8YOAhsBAwsJBwMV
+CggCHgECF4ACGQEACgkQEg/f56H5sRhOYgF5AY9PxbEUyJbNZfoOJB4mJOAXYvM3
+U7WdmqVXmynpe6A/Ef+RigAAe6WyaYHzOOrbAYCGa0VOFqfXUYH3JS327G7rxPOF
+lHlufU2TdEa82N3G5h9SaukSJ7t9o/mkMV/Z2lPOVgRcv8YOEggqhkjOPQMBBwID
+BGEPUNOi8af4WMjFn72ouhVvaR14RhHfW3cTmcX1sG7yBk9KAT2C9k6EBIwPRFJV
+KwiU96hDz1fH+WQXpGb8WiwDAQoJwocEGBMKAA8FAly/xg4FCQ8JnAACGwQACgkQ
+Eg/f56H5sRiXLgGAxK1HnoWLVyTNyej1Hni2KI/ZZd2E+thil1fFDDS8zkGma72l
+/wvMwKLGaos1nU/WAX0aC4T0hQBdD55314C2LN+Jpo3LNz+hCUcQ6f21de9vdJ2C
+So3vTh01V5/zOMqiDsvOUgRcv8YOEwgqhkjOPQMBBwIDBDITiY9LEYnrpT1DLjF3
+Plmpx/r3dcRe1FU3Z+KT9ugvELZ32eDO7zMk+U/E1fJsFjlFBIfcUCLbAlUqjrzl
+5MHCwCcEGBMKAA8FAly/xg4FCQ8JnAACGyIAagkQEg/f56H5sRhfIAQZEwoABgUC
+XL/GDgAKCRBFSz47NxWKLDnXAQD/mV5bYeHroX8ZBRCTjjMePJ7izbDkhEVeDYaa
+SG7jhgD/eQw9zXzOWVtcmIXlxClDLI/Ho29BB+T7DGQD//aRusMkOwF+LqeRGiQT
+xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
+3otoouLXS27sHS/szvgYJzR1R7MqyQxQ8odRvQJewHjAENOlJrBeSBRYk6c=
+=CsAL
+-----END PGP PUBLIC KEY BLOCK-----
+
+`;
+
+      var sharedSecret = generateSymmetricKey();
+      setData("sharedSecret", sharedSecret)
+
+      encryptMessage([serverPublic], sharedSecret, function(encrypted) {
+        socket.emit('login', encrypted);
+      })
+
+    });
+
 
     function confirm(message, yesCallback, noCallback) {
       $('.modal').modal('hide');
@@ -1412,16 +1656,16 @@
     }
 
     function startLoading(message) {
-      $('.modal').modal('hide');
-      $('#loadingmodaltext').html("<strong>" + message + "</strong>");
-      $('#fullpageloadingModal').modal({
-        backdrop: 'static',
-        keyboard: false
-      });
+      /*    $('.modal').modal('hide');
+          $('#loadingmodaltext').html("<strong>" + message + "</strong>");
+          $('#fullpageloadingModal').modal({
+            backdrop: 'static',
+            keyboard: false
+          });*/
     }
 
     function stopLoading() {
-      $('#fullpageloadingModal').modal('hide');
+      //$('#fullpageloadingModal').modal('hide');
     }
 
     function generateToken() {
@@ -1456,9 +1700,7 @@
         setData("currentPage", place)
       }
       hideAll();
-      if (place == "startScreenPage") {
-        doBridgeSetup()
-      }
+
       if (place == "dataPage") {
         doData()
       }
@@ -1610,7 +1852,8 @@
         passwordhash = hexString(digestValue);
         data = {
           username: username,
-          password: passwordhash
+          password: passwordhash,
+          client: 'webapp'
         }
         encryptedBridgeRequest({
           path: "login",
@@ -1632,6 +1875,48 @@
               $("input").val("")
             } else {
               response = JSON.parse(response);
+
+              const serverPublic = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: Tratchat OpenPGP v1.0
+Comment: https://tratchat.com || credit to keybase
+
+xm8EXL/GDhMFK4EEACIDAwQXPGDRZitEXembe2qftob3wf7AbHhFaYVWMjIO0I0b
+1N38QvDwOY01KVWCR+RZIlEVBrScfEurfYp/KAWL0Mq+3iiKD9QlrfyBGYMhnCQ4
+aJmpZ+1qktTYwOvVJMyeCpTNBnNlcnZlcsKSBBMTCgAaBQJcv8YOAhsBAwsJBwMV
+CggCHgECF4ACGQEACgkQEg/f56H5sRhOYgF5AY9PxbEUyJbNZfoOJB4mJOAXYvM3
+U7WdmqVXmynpe6A/Ef+RigAAe6WyaYHzOOrbAYCGa0VOFqfXUYH3JS327G7rxPOF
+lHlufU2TdEa82N3G5h9SaukSJ7t9o/mkMV/Z2lPOVgRcv8YOEggqhkjOPQMBBwID
+BGEPUNOi8af4WMjFn72ouhVvaR14RhHfW3cTmcX1sG7yBk9KAT2C9k6EBIwPRFJV
+KwiU96hDz1fH+WQXpGb8WiwDAQoJwocEGBMKAA8FAly/xg4FCQ8JnAACGwQACgkQ
+Eg/f56H5sRiXLgGAxK1HnoWLVyTNyej1Hni2KI/ZZd2E+thil1fFDDS8zkGma72l
+/wvMwKLGaos1nU/WAX0aC4T0hQBdD55314C2LN+Jpo3LNz+hCUcQ6f21de9vdJ2C
+So3vTh01V5/zOMqiDsvOUgRcv8YOEwgqhkjOPQMBBwIDBDITiY9LEYnrpT1DLjF3
+Plmpx/r3dcRe1FU3Z+KT9ugvELZ32eDO7zMk+U/E1fJsFjlFBIfcUCLbAlUqjrzl
+5MHCwCcEGBMKAA8FAly/xg4FCQ8JnAACGyIAagkQEg/f56H5sRhfIAQZEwoABgUC
+XL/GDgAKCRBFSz47NxWKLDnXAQD/mV5bYeHroX8ZBRCTjjMePJ7izbDkhEVeDYaa
+SG7jhgD/eQw9zXzOWVtcmIXlxClDLI/Ho29BB+T7DGQD//aRusMkOwF+LqeRGiQT
+xn7pTnVCYo7/Euxod4P8mcsa49nyf8T3OjTo4K5Gng/bYySKrPwlIC6LAYCXmfHm
+3otoouLXS27sHS/szvgYJzR1R7MqyQxQ8odRvQJewHjAENOlJrBeSBRYk6c=
+=CsAL
+-----END PGP PUBLIC KEY BLOCK-----
+
+`;
+
+
+              encryptMessage([serverPublic], JSON.stringify({
+                token: response.token
+              }), function(encrypted) {
+                socket.emit('setToken', encrypted);
+              })
+
+
+
+
+
+
+
+
+
               setData("token", response.token)
               setData("yourUsername", username)
 
@@ -1950,7 +2235,8 @@
                 $('#chatsPageChats').append('<li chat-id="' + preventHTMLinject(obj.chatID) +
                   '" data-lastSent="' + preventHTMLinject(obj.lastSent) +
                   '" class="list-group-item chat chatlisthing" style="/*background-color: transparent;*/border-top-right-radius: 0px !important;border-top-left-radius: 0px !important;border-bottom-right-radius: 0px !important;border-bottom-left-radius: 0px !important;border-left-color: transparent;border-right-color: transparent;"> <div class="row d-flex justify-content-center align-items-center" style="height: 100%;"> <div class="col-3" style="height: 100%;"><i class="' +
-                  preventHTMLinject(icon) + '"  style="font-size:4vw;color:' + preventHTMLinject(color) + '"></i></div> <div class="col"><h6 style="font-size: 1.5vw;">' + preventHTMLinject(groupname) + '</h6> <h6 style="font-size: 1vw;">' + preventHTMLinject(groupusername) + '</h6></div></div></li>');
+                  preventHTMLinject(icon) + '"  style="font-size:4vw;color:' + preventHTMLinject(color) + '"></i></div> <div class="col"><h6 style="font-size: 1.5vw;">' + preventHTMLinject(groupname) + '</h6> <h6 style="font-size: 1vw;">' +
+                  preventHTMLinject(groupusername) + '</h6></div></div></li>');
 
               }
 
@@ -2030,17 +2316,19 @@
           if (!existsAlreadyPrinted(obj.id)) {
             addAlreadyPrinted(obj.id)
             decryptMessage(getData("userPrivate"), obj.message, function(decryptedText, err) {
-              if(err){
+              if (err) {
                 printChat(array, index + 1, redo, chatID, resolve, arrayOfPrinted)
 
-              }else{
+              } else {
                 if (obj.sender == "you") {
                   if (redo != true) {
-                    $("#chatPageChatList").append('<ul chat-id= "' + preventHTMLinject(obj.id) + '" class="list-group float-right chatitem" style="width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><span>' + preventHTMLinject(decryptedText) + '</span></li></ul>')
+                    $("#chatPageChatList").append('<ul chat-id= "' + preventHTMLinject(obj.id) + '" class="list-group float-right chatitem" style="width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><span>' + preventHTMLinject(
+                      decryptedText) + '</span></li></ul>')
                   }
                 } else {
                   $("#chatPageChatList").append('<ul chat-id= "' + preventHTMLinject(obj.id) +
-                    '" class="list-group chatitem" style="padding-top:5px; width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><p style="margin-bottom: 0px;margin-top: -4px;color: ' + preventHTMLinject(obj.color) + ';">' + preventHTMLinject(obj.sender) +
+                    '" class="list-group chatitem" style="padding-top:5px; width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><p style="margin-bottom: 0px;margin-top: -4px;color: ' + preventHTMLinject(obj.color) + ';">' +
+                    preventHTMLinject(obj.sender) +
                     '</p><span>' +
                     preventHTMLinject(decryptedText) + '</span></li></ul>')
                 }
@@ -2056,54 +2344,60 @@
         }
 
       } else {
-        var needToDeleteArray = $.grep(getAlreadyPrinted(), function(el){return $.inArray(el, arrayOfPrinted) == -1});
-      //  console.log(needToDeleteArray)
-        for(var x = 0; x < needToDeleteArray.length; x++){
+        var needToDeleteArray = $.grep(getAlreadyPrinted(), function(el) {
+          return $.inArray(el, arrayOfPrinted) == -1
+        });
+        //  console.log(needToDeleteArray)
+        for (var x = 0; x < needToDeleteArray.length; x++) {
           $('.chatitem[chat-id="' + needToDeleteArray[x] + '"]').remove();
         }
         $(".chatitem").dblclick(function() {
           var random = generateToken()
           var messageID = $(this).attr('chat-id')
-          if(!$(this).children('li').children('div').length){
-            $(this).children('li').append('<div id="'+preventHTMLinject(random)+'" class="text-right"><button onclick="$(\'#'+preventHTMLinject(random)+'\').remove()" class="btn btn-outline-primary btn-sm" type="button" style="border-color: transparent;color: #f4476b;background-color: white;">cancel</button><button onclick="deleteMessage(\''+preventHTMLinject(messageID)+'\')" class="btn btn-danger btn-sm" type="button" style="border-color: #f4476b;color: #f4476b;background-color: white;">delete message</button></div>');
+          if (!$(this).children('li').children('div').length) {
+            $(this).children('li').append('<div id="' + preventHTMLinject(random) + '" class="text-right"><button onclick="$(\'#' + preventHTMLinject(random) +
+              '\').remove()" class="btn btn-outline-primary btn-sm" type="button" style="border-color: transparent;color: #f4476b;background-color: white;">cancel</button><button onclick="deleteMessage(\'' + preventHTMLinject(messageID) +
+              '\')" class="btn btn-danger btn-sm" type="button" style="border-color: #f4476b;color: #f4476b;background-color: white;">delete message</button></div>');
           }
         });
         resolve("s")
       }
 
     }
-    function deleteMessage(id){
+
+    function deleteMessage(id) {
       $('.chatitem[chat-id="' + id + '"]').remove();
 
       var currentChatID = getData("chatID");
-          // yes
-          var chatID = getData("chatID")
-          data = {
-            token: getData("token"),
-            chatID: currentChatID,
-            messageID: id
-          }
-        //  startLoading("deleting message...")
-          encryptedBridgeRequest({
-            path: "deleteMessage",
-            data: data,
-            privateKey: getData("privateKey"),
-            publicKey: getData("publicKey"),
-            bridge: getData("bridge")
-          }, function(response, err) {
-            if (err) {
-              $("#errorModal").modal()
-            } else {
-              //do things
-              if (response != "done") {
-                $("#errorModal").modal()
+      // yes
+      var chatID = getData("chatID")
+      data = {
+        token: getData("token"),
+        chatID: currentChatID,
+        messageID: id
+      }
+      //  startLoading("deleting message...")
+      encryptedBridgeRequest({
+        path: "deleteMessage",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          $("#errorModal").modal()
+        } else {
+          //do things
+          if (response != "done") {
+            $("#errorModal").modal()
 
-          //      stopLoading()
-              //  $('.chatitem[chat-id="' + id + '"]').remove();
-              }
-            }
-          })
+            //      stopLoading()
+            //  $('.chatitem[chat-id="' + id + '"]').remove();
+          }
+        }
+      })
     }
+
     function doChat(id) {
       return new Promise(function(resolve, reject) {
 
@@ -2188,8 +2482,9 @@
       }
       $("#sendChatInput").val('')
       var customChatID = generateToken()
-      $("#chatPageChatList").append('<ul chat-id="'+preventHTMLinject(customChatID)+'" class="list-group float-right chatitem" style="width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><span>' + preventHTMLinject(message) +
-        '</span><span id="' + preventHTMLinject(customChatID) + '" class="spinner-border spinner-border-sm text-center float-right" role="status" style="color: rgb(136,136,136); width: 14px;height: 14px; padding-bottom: 4px"></span>&nbsp;</li></ul>')
+      $("#chatPageChatList").append('<ul chat-id="' + preventHTMLinject(customChatID) + '" class="list-group float-right chatitem" style="width: 60%;margin-bottom: 1vh!important;"><li class="list-group-item"><span>' + preventHTMLinject(message) +
+        '</span><span id="' + preventHTMLinject(customChatID) +
+        '" class="spinner-border spinner-border-sm text-center float-right" role="status" style="color: rgb(136,136,136); width: 14px;height: 14px; padding-bottom: 4px"></span>&nbsp;</li></ul>')
       var d = $('#chatPageChatList');
       d.scrollTop(d.prop("scrollHeight"));
       var chat = getData("chatID");
@@ -2256,10 +2551,41 @@
                 $("#chatname").text("")
                 $("#chatusername").text("")
                 setData("chatID", "none")
+                resolve("s")
+
                 return;
               }
               if (response != "error") {
                 data1 = JSON.parse(response);
+                resetKeys()
+                for (var i = 0; i < data1['publicKeys'].length; i++) {
+                  setCurrentChatKey(data1['publicKeys'][i])
+                }
+                if (data1['names'].length == 2) {
+                  for (var i = 0; i < data1['names'].length; i++) {
+                    if (data1['names'][i].username != getData("yourUsername")) {
+                      $("#chatname").html(data1['names'][i].name + '<i onclick="$(\'#chatoptionsmodal\').modal()" class="fa fa-bars float-right"></i>')
+                      $("#chatusername").html("@" + data1['names'][i].username + '<i style="color:transparent;" class="fa fa-bars float-right"></i>')
+                    }
+                  }
+                } else {
+                  var usernameList = ""
+                  for (var i = 0; i < data1['names'].length; i++) {
+                    if (data1['names'][i].username.toLowerCase() != getData("yourUsername").toLowerCase()) {
+                      if (usernameList.includes("@")) {
+                        usernameList += ", @" + data1['names'][i].username
+
+                      } else {
+                        usernameList += "@" + data1['names'][i].username
+                      }
+                    }
+
+                  }
+
+                  $("#chatname").html("Group Chat" + '<i onclick="$(\'#chatoptionsmodal\').modal()" class="fa fa-bars float-right"></i>')
+                  $("#chatusername").html(usernameList + '<i style="color:transparent;" class="fa fa-bars float-right"></i>')
+
+                }
                 data = data1['chats']
                 printChat(data, 0, true, id, function() {
                   resolve("s")
@@ -2281,13 +2607,15 @@
     async function updateChats() {
       if (getData("currentPage") == "chatsPage") {
         doChats().then(function(response) {
-          updateChats()
+          /*setTimeout(function() {
+            updateChats()
+          }, 500) */
         });
       }
     }
     //  $('div[comment_id="value"]').remove();
     $("#deleteLast10ChatsButton").click(function() {
-      confirm("delete the last 10 messages in this chat? you will not be able to reverse this action.",
+      confirm("delete the last 10 messages in this chat? <br> You will not be able to reverse this action.",
         function() {
           // yes
           startLoading("deleting last 10 chats...")
@@ -2321,7 +2649,7 @@
       )
     })
     $("#deleteallchatsbutton").click(function() {
-      confirm("delete all messages in this chat? you will not be able to reverse this action.",
+      confirm("delete all messages in this chat?  <br>you will not be able to reverse this action.",
         function() {
           startLoading("deleting all chats...")
           data = {
@@ -2355,7 +2683,7 @@
 
     function leaveChat() {
       var currentChatID = getData("chatID");
-      confirm("leave this chat? All messages that you sent in this chat will be deleted. You cannot reverse this action.",
+      confirm("leave this chat?  <br>All messages that you sent in this chat will be deleted.  <br>You cannot reverse this action.",
         function() {
           // yes
           var chatID = getData("chatID")
@@ -2390,7 +2718,7 @@
       )
     }
     $("#purgechatbutton").click(function() {
-      confirm("purge this chat? all messages, users, and all record of the chat will be deleted. you will not be able to reverse this action.",
+      confirm("purge this chat?  <br>all messages, users, and all record of the chat will be deleted.  <br>you will not be able to reverse this action.",
         function() {
           // yes
           var chatID = getData("chatID")
@@ -2628,7 +2956,7 @@
 
     }
     $("#purgeChatsButton").click(function() {
-      confirm("Delete <strong>ALL </strong> chats and messages you have sent or received on that tratchat platform. This will delete chats on other users devices as well.", function() {
+      confirm("Delete <strong>ALL </strong> chats and messages you have sent or received on that tratchat platform?  <br> This will delete chats on other users devices as well.", function() {
         startLoading("purging your chat history...")
         encryptedBridgeRequest({
           path: "purgeAllChats",
@@ -2659,7 +2987,7 @@
     })
 
     function purgeAccount() {
-      confirm("Delete <strong>ALL </strong>data associated with your account immediatly, erasing all evidence you ever existed on the tratchat platform. You cannot undo this action.", function() {
+      confirm("Delete <strong>ALL </strong>data associated with your account immediatly, erasing all evidence you ever existed on the tratchat platform.  <br>You cannot undo this action.", function() {
         startLoading('purging your account...')
         encryptedBridgeRequest({
           path: "purgeAccount",
@@ -2763,8 +3091,288 @@
         }
       });
     });
+    var sha256 = function a(b) {
+      function c(a, b) {
+        return a >>> b | a << 32 - b
+      }
+      for (var d, e, f = Math.pow, g = f(2, 32), h = "length", i = "", j = [], k = 8 * b[h], l = a.h = a.h || [], m = a.k = a.k || [], n = m[h], o = {}, p = 2; 64 > n; p++)
+        if (!o[p]) {
+          for (d = 0; 313 > d; d += p) o[d] = p;
+          l[n] = f(p, .5) * g | 0, m[n++] = f(p, 1 / 3) * g | 0
+        } for (b += "\x80"; b[h] % 64 - 56;) b += "\x00";
+      for (d = 0; d < b[h]; d++) {
+        if (e = b.charCodeAt(d), e >> 8) return;
+        j[d >> 2] |= e << (3 - d) % 4 * 8
+      }
+      for (j[j[h]] = k / g | 0, j[j[h]] = k, e = 0; e < j[h];) {
+        var q = j.slice(e, e += 16),
+          r = l;
+        for (l = l.slice(0, 8), d = 0; 64 > d; d++) {
+          var s = q[d - 15],
+            t = q[d - 2],
+            u = l[0],
+            v = l[4],
+            w = l[7] + (c(v, 6) ^ c(v, 11) ^ c(v, 25)) + (v & l[5] ^ ~v & l[6]) + m[d] + (q[d] = 16 > d ? q[d] : q[d - 16] + (c(s, 7) ^ c(s, 18) ^ s >>> 3) + q[d - 7] + (c(t, 17) ^ c(t, 19) ^ t >>> 10) | 0),
+            x = (c(u, 2) ^ c(u, 13) ^ c(u, 22)) + (u & l[1] ^ u & l[2] ^ l[1] & l[2]);
+          l = [w + x | 0].concat(l), l[4] = l[4] + w | 0
+        }
+        for (d = 0; 8 > d; d++) l[d] = l[d] + r[d] | 0
+      }
+      for (d = 0; 8 > d; d++)
+        for (e = 3; e + 1; e--) {
+          var y = l[d] >> 8 * e & 255;
+          i += (16 > y ? 0 : "") + y.toString(16)
+        }
+      return i
+    };
 
-    function preventHTMLinject(html){
+    function doDevicesPage() {
+      $("#yourDevicesList").empty();
+      $("#yourDevicesList").append('<div style="width:100%" class="text-center d-flex justify-content-center align-items-center"><span class="spinner-border" role="status" style="margin-top:2vh;width: 3vw;height: 3vw;"></span></div>')
+
+      encryptedBridgeRequest({
+        path: "getDevices",
+        data: {
+          token: getData("token")
+        },
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        console.log(response)
+        $("#yourDevicesList").empty();
+        var data = JSON.parse(response);
+        for (var i = 0; i < data.length; i++) {
+          var obj = data[i];
+          if (obj.token == sha256(getData('token'))) {
+            $("#yourDevicesList").prepend('<li id="' + obj.token + '" lastseen="' + obj.lastseen + '" locked="' + obj.locked + '" name="' + obj.name +
+              '" class="deviceedit list-group-item"><div class="align-items-center d-flex justify-content-center row"><div class=col><h6 style=font-size:1.5vw;color:#f4476b><strong>This Device</strong></h6><h6 style=font-size:1.2vw;margin-top:1vh class=text-left>Current Name:   <span style=color:#f4476b>' +
+              obj.name + '</span></h6></div><div class=col-1><i id="' + obj.token + '" class="fa fa-edit float-right deviceedit" style=font-size:21px;color:#6f7a85></i></div></div>')
+          } else {
+            if (obj.locked == "false") {
+              $("#yourDevicesList").append('<li id="' + obj.token + '" lastseen="' + obj.lastseen + '" locked="' + obj.locked + '" name="' + obj.name +
+                '" class="deviceedit list-group-item"><div class="align-items-center d-flex justify-content-center row"><div class=col><h6 style=font-size:1.5vw>' + obj.name +
+                '</h6><h6 style=font-size:1.2vw>Last Seen : <span style=color:#f4476b>' + "now" + '</span>   <span style=color:#60dd49><i class="fa fa-unlock"></i> Unlocked</span></h6></div><div class=col-1><i id="' + obj.token +
+                '" class="fa fa-edit float-right deviceedit" style=font-size:21px;color:#6f7a85></i></div></div>')
+            } else {
+              $("#yourDevicesList").append('<li id="' + obj.token + '" lastseen="' + obj.lastseen + '" locked="' + obj.locked + '" name="' + obj.name +
+                '" class="deviceedit list-group-item"><div class="align-items-center d-flex justify-content-center row"><div class=col><h6 style=font-size:1.5vw>' + obj.name +
+                '</h6><h6 style=font-size:1.2vw>Last Seen : <span style=color:#f4476b>' + "now" + '</span>   <span style=color:red><i class="fa fa-lock"></i> Locked</span></h6></div><div class=col-1><i id="' + obj.token +
+                '" class="fa fa-edit float-right deviceedit" style=font-size:21px;color:#6f7a85></i></div></div>')
+
+            }
+          }
+        }
+        $(".deviceedit").click(function() {
+          var deviceid = $(this).attr("id");
+          var lastseen = "now" //$(this).attr("lastseen");
+          var locked = $(this).attr("locked");
+          var name = $(this).attr("name");
+
+          $("#devicemodal").modal();
+          $("#deviceexpandedmeta").empty()
+          if (locked == "true") {
+            $("#displaylock").hide();
+            $("#displayunlock").show();
+            $("#deviceexpandedmeta").attr("lastseen", lastseen)
+            $("#deviceexpandedmeta").append('Last Seen :&nbsp;<span style="color: #f4476b;">' + lastseen + '</span>&nbsp; &nbsp;<span style="color: red;"><i class="fa fa-lock"></i>&nbsp;Locked</span>')
+          } else {
+            $("#displaylock").show();
+            $("#displayunlock").hide();
+            $("#deviceexpandedmeta").append('Last Seen :&nbsp;<span style="color: #f4476b;">' + lastseen + '</span>&nbsp; &nbsp;<span style="color:#60dd49"><i class="fa fa-unlock"></i>&nbsp;Unlocked</span>')
+          }
+          $("#deviceexpandedname").text(name)
+          $("#deviceexpandedname").attr("hash", deviceid)
+        })
+        $("#yourDevicesList").prepend("<h6 style=font-size:2vh; class=text-center>An adjective followed by an animal is a default device name</h6>")
+
+      });
+
+    }
+
+    function redoDevicesPage() {
+
+      encryptedBridgeRequest({
+        path: "getDevices",
+        data: {
+          token: getData("token")
+        },
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        console.log(response)
+        $("#yourDevicesList").empty();
+        var data = JSON.parse(response);
+        for (var i = 0; i < data.length; i++) {
+          var obj = data[i];
+          if (obj.token == sha256(getData('token'))) {
+            $("#yourDevicesList").prepend('<li id="' + obj.token + '" lastseen="' + obj.lastseen + '" locked="' + obj.locked + '" name="' + obj.name +
+              '" class="deviceedit list-group-item"><div class="align-items-center d-flex justify-content-center row"><div class=col><h6 style=font-size:1.5vw;color:#f4476b><strong>This Device</strong></h6><h6 style=font-size:1.2vw;margin-top:1vh class=text-left>Current Name:   <span style=color:#f4476b>' +
+              obj.name + '</span></h6></div><div class=col-1><i id="' + obj.token + '" class="fa fa-edit float-right deviceedit" style=font-size:21px;color:#6f7a85></i></div></div>')
+          } else {
+            if (obj.locked == "false") {
+              $("#yourDevicesList").append('<li id="' + obj.token + '" lastseen="' + obj.lastseen + '" locked="' + obj.locked + '" name="' + obj.name +
+                '" class="deviceedit list-group-item"><div class="align-items-center d-flex justify-content-center row"><div class=col><h6 style=font-size:1.5vw>' + obj.name +
+                '</h6><h6 style=font-size:1.2vw>Last Seen : <span style=color:#f4476b>' + "now" + '</span>   <span style=color:#60dd49><i class="fa fa-unlock"></i> Unlocked</span></h6></div><div class=col-1><i id="' + obj.token +
+                '" class="fa fa-edit float-right deviceedit" style=font-size:21px;color:#6f7a85></i></div></div>')
+            } else {
+              $("#yourDevicesList").append('<li id="' + obj.token + '" lastseen="' + obj.lastseen + '" locked="' + obj.locked + '" name="' + obj.name +
+                '" class="deviceedit list-group-item"><div class="align-items-center d-flex justify-content-center row"><div class=col><h6 style=font-size:1.5vw>' + obj.name +
+                '</h6><h6 style=font-size:1.2vw>Last Seen : <span style=color:#f4476b>' + "now" + '</span>   <span style=color:red><i class="fa fa-lock"></i> Locked</span></h6></div><div class=col-1><i id="' + obj.token +
+                '" class="fa fa-edit float-right deviceedit" style=font-size:21px;color:#6f7a85></i></div></div>')
+
+            }
+          }
+        }
+        $(".deviceedit").click(function() {
+          var deviceid = $(this).attr("id");
+          var lastseen = "now" //$(this).attr("lastseen");
+          var locked = $(this).attr("locked");
+          var name = $(this).attr("name");
+
+          $("#devicemodal").modal();
+          $("#deviceexpandedmeta").empty()
+          if (locked == "true") {
+            $("#displaylock").hide();
+            $("#displayunlock").show();
+            $("#deviceexpandedmeta").attr("lastseen", lastseen)
+            $("#deviceexpandedmeta").append('Last Seen :&nbsp;<span style="color: #f4476b;">' + lastseen + '</span>&nbsp; &nbsp;<span style="color: red;"><i class="fa fa-lock"></i>&nbsp;Locked</span>')
+          } else {
+            $("#displaylock").show();
+            $("#displayunlock").hide();
+            $("#deviceexpandedmeta").append('Last Seen :&nbsp;<span style="color: #f4476b;">' + lastseen + '</span>&nbsp; &nbsp;<span style="color:#60dd49"><i class="fa fa-unlock"></i>&nbsp;Unlocked</span>')
+          }
+          $("#deviceexpandedname").text(name)
+          $("#deviceexpandedname").attr("hash", deviceid)
+        })
+        $("#yourDevicesList").prepend("<h6 style=font-size:2vh; class=text-center>An adjective followed by an animal is a default device name</h6>")
+
+      });
+
+    }
+    $("#devicelockbutton").click(function() {
+      var devicename = $("#deviceexpandedname").attr("hash");
+      $("#deviceexpandedmeta").empty()
+      $("#deviceexpandedmeta").append('Last Seen :&nbsp;<span style="color: #f4476b;">' + $("#deviceexpandedmeta").attr("lastseen") + '</span>&nbsp; &nbsp;<span style="color: red;"><i class="fa fa-lock"></i>&nbsp;Locked</span>')
+      $("#displaylock").hide();
+      $("#displayunlock").show();
+      // startLoading("locking device")
+      data = {
+        status: "true",
+        token: getData("token"),
+        tokenhash: devicename
+      }
+      encryptedBridgeRequest({
+        path: "setLocked",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response == "done") {
+            console.log("done")
+
+            redoDevicesPage();
+
+          }
+        }
+      });
+    })
+    $("#deviceunlocklockbutton").click(function() {
+      var devicename = $("#deviceexpandedname").attr("hash");
+      $("#deviceexpandedmeta").empty()
+      $("#deviceexpandedmeta").append('Last Seen :&nbsp;<span style="color: #f4476b;">' + $("#deviceexpandedmeta").attr("lastseen") + '</span>&nbsp; &nbsp;<span style="color:#60dd49"><i class="fa fa-unlock"></i>&nbsp;Unlocked</span>')
+      $("#displaylock").show();
+      $("#displayunlock").hide();
+      // startLoading("locking device")
+      data = {
+        status: "false",
+        token: getData("token"),
+        tokenhash: devicename
+      }
+      encryptedBridgeRequest({
+        path: "setLocked",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response == "done") {
+            console.log("done")
+
+            redoDevicesPage();
+
+          }
+        }
+      });
+    })
+    $("#deviceNameButton").click(function() {
+      var devicename = $("#deviceexpandedname").attr("hash");
+      var changeName = $("#deviceNameInput").val();
+      $("#deviceexpandedname").text(changeName)
+      $("#deviceNameInput").val("")
+      data = {
+        token: getData("token"),
+        tokenhash: devicename,
+        name: changeName
+      }
+      encryptedBridgeRequest({
+        path: "setTokenName",
+        data: data,
+        privateKey: getData("privateKey"),
+        publicKey: getData("publicKey"),
+        bridge: getData("bridge")
+      }, function(response, err) {
+        if (err) {
+          console.log(err)
+        } else {
+          //do things
+          if (response == "done") {
+            console.log("done")
+            redoDevicesPage();
+
+          }
+        }
+      });
+    })
+    $("#purgedevicebutton").click(function() {
+      confirm("Purge this device? <br> All data will be permanently deleted.", function() {
+        var devicename = $("#deviceexpandedname").attr("hash");
+        data = {
+          token: getData("token"),
+          tokenhash: devicename
+        }
+        encryptedBridgeRequest({
+          path: "purgeDevice",
+          data: data,
+          privateKey: getData("privateKey"),
+          publicKey: getData("publicKey"),
+          bridge: getData("bridge")
+        }, function(response, err) {
+          if (err) {
+            console.log(err)
+          } else {
+            //do things
+            if (response == "done") {
+              console.log("done")
+              redoDevicesPage();
+              $("#devicemodal").modal("hide")
+            }
+          }
+        });
+      })
+    })
+
+    function preventHTMLinject(html) {
       return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
   </script>
